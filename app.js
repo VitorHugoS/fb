@@ -255,60 +255,66 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
-      case 'image':
-        sendImageMessage(senderID);
-        break;
+      //case 'image':
+      //  sendImageMessage(senderID);
+      //  break;
 
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
+     // case 'gif':
+     //   sendGifMessage(senderID);
+     //   break;
 
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
+    //  case 'audio':
+    //    sendAudioMessage(senderID);
+    //    break;
 
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
+    //  case 'video':
+    //    sendVideoMessage(senderID);
+    //    break;
 
-      case 'file':
-        sendFileMessage(senderID);
-        break;
+    //  case 'file':
+    //    sendFileMessage(senderID);
+    //    break;
 
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
+    //  case 'button':
+    //    sendButtonMessage(senderID);
+    //    break;
 
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
+    //  case 'generic':
+    //    sendGenericMessage(senderID);
+    //    break;
 
-      case 'receipt':
-        sendReceiptMessage(senderID);
-        break;
+     // case 'receipt':
+    //    sendReceiptMessage(senderID);
+    //    break;
 
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;        
+    //  case 'quick reply':
+    //    sendQuickReply(senderID);
+    //    break;        
 
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;        
+    //  case 'read receipt':
+    //    sendReadReceipt(senderID);
+    //    break;        
 
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;        
+    //  case 'typing on':
+    //    sendTypingOn(senderID);
+    //    break;        
 
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;        
+    //  case 'typing off':
+    //    sendTypingOff(senderID);
+    //    break;        
 
-      case 'account linking':
-        sendAccountLinking(senderID);
-        break;
+    //  case 'account linking':
+    //    sendAccountLinking(senderID);
+    //    break;
 
-      default:
-        sendTextMessage(senderID, messageText);
+    //  default:
+    //    sendTextMessage(senderID, messageText);
+
+    case "Promoções"{
+          sendPromocaoDia(senderID);
+      break;
+    }
+
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -677,6 +683,78 @@ function sendReceiptMessage(recipientId) {
             name: "$100 Off Coupon",
             amount: -100
           }]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendReceiptMessage(recipientId) {
+
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message:{
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          "top_element_style": "compact",
+          elements: [ {
+                    "title": "Classic White T-Shirt",
+                    "image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
+                    "subtitle": "100% Cotton, 200% Comfortable",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                            "title": "Buy",
+                            "type": "web_url",
+                            "url": "https://peterssendreceiveapp.ngrok.io/shop?item=100",
+                            "messenger_extensions": true,
+                            "webview_height_ratio": "tall",
+                            "fallback_url": "https://peterssendreceiveapp.ngrok.io/"                        
+                        }
+                    ]                
+                },
+                {
+                    "title": "Classic White T-Shirt",
+                    "image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
+                    "subtitle": "100% Cotton, 200% Comfortable",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                            "title": "Buy",
+                            "type": "web_url",
+                            "url": "https://peterssendreceiveapp.ngrok.io/shop?item=100",
+                            "messenger_extensions": true,
+                            "webview_height_ratio": "tall",
+                            "fallback_url": "https://peterssendreceiveapp.ngrok.io/"                        
+                        }
+                    ]                
+                }
+                ],
+             "buttons": [
+                {
+                    "title": "View More",
+                    "type": "postback",
+                    "payload": "payload"                        
+                }
+            ]  
         }
       }
     }
