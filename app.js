@@ -310,7 +310,7 @@ function receivedMessage(event) {
     
 
     case 'Promoções': 
-          sendPromocaoDia(senderID);
+          sendGenericMessage(senderID);
     break;
     default:
       sendTextMessage(senderID, messageText);
@@ -530,7 +530,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: messageText,
+      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
