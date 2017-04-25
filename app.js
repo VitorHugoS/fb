@@ -589,7 +589,7 @@ function sendGenericMessage(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "rift",
+            title: "Pao 500g",
             subtitle: "Next-generation virtual reality",
             item_url: "https://www.oculus.com/en-us/rift/",               
             image_url: SERVER_URL + "/assets/rift.png",
@@ -603,7 +603,7 @@ function sendGenericMessage(recipientId) {
               payload: "Payload for first bubble",
             }],
           }, {
-            title: "touch",
+            title: "Rosca",
             subtitle: "Your Hands, Now in VR",
             item_url: "https://www.oculus.com/en-us/touch/",               
             image_url: SERVER_URL + "/assets/touch.png",
