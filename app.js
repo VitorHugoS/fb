@@ -699,29 +699,59 @@ function sendPromocaoDia(recipientId) {
     recipient: {
       id: recipientId
     },
-    message: {
-      text: "What's your favorite movie genre?",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"Action",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+    message:{
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          top_element_style: "compact",
+          elements: [
+          {
+            title: "Produto 1",
+            subtitle: "10% de desconto até as 21h",
+            quantity: 1,
+            price: 10.00,
+            currency: "R$",
+            image_url: SERVER_URL + "/assets/riftsq.png"
+          }, 
+           {
+            title: "Produto 2",
+            subtitle: "tt",
+            image_url: "https://peterssendreceiveapp.ngrok.io/img/collection.png",
+            default_action:{
+              type: "web_url",
+              url: "https://peterssendreceiveapp.ngrok.io/shop_collection",
+              messenger_extensions: true,
+              webview_height_ratio: "tall",
+              fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+            },
+             buttons: [
+                        {
+                          title: "View",
+                          type: "web_url",
+                          url: "https://peterssendreceiveapp.ngrok.io/collection",
+                          messenger_extensions: true,
+                          webview_height_ratio: "tall",
+                          fallback_url: "https://peterssendreceiveapp.ngrok.io/"                        
+                        }
+                    ]
+          }, 
+          ]
         },
-        {
-          "content_type":"text",
-          "title":"Comedy",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Drama",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
-      ]
+        buttons: [
+                {
+                    title: "View More",
+                    type: "postback",
+                    payload: "payload"                        
+                }
+            ]  
+      }
     }
   };
 
   callSendAPI(messageData);
+
+
 }
 
 /*
