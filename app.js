@@ -152,7 +152,7 @@ app.get('/banco', function(req, res) {
          console.log('body:', body); // Print the HTML for the Google homepage. 
          var mensagem=body;
       });
-        res.send(mensagem);
+        console(mensagem);
 });
 
 /*
