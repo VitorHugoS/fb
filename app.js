@@ -22,37 +22,14 @@ const
 
 var pool      =    mysql.createPool({
     connectionLimit : 100, //important
-    host     : 'robb0377.publiccloud.com.br;port=3306',
+    host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
     database : 'atadesig2_intranet',
     debug    :  false
 });
 
-function handle_database(req,res) {
 
-    pool.getConnection(function(err,connection){
-        if (err) {
-          connection.release();
-          res.json({"code" : 100, "status" : "Error in connection database"});
-          return;
-        }   
-
-        console.log('connected as id ' + connection.threadId);
-
-        connection.query("select * from user",function(err,rows){
-            connection.release();
-            if(!err) {
-                res.json(rows);
-            }           
-        });
-
-        connection.on('error', function(err) {      
-              res.json({"code" : 100, "status" : "Error in connection database"});
-              return;     
-        });
-  });
-}
 
 
 var app = express();
@@ -761,6 +738,32 @@ function sendReceiptMessage(recipientId) {
 
   callSendAPI(messageData);
 }*/
+
+
+function handle_database(req,res) {
+
+    pool.getConnection(function(err,connection){
+        if (err) {
+          connection.release();
+          res.json({"code" : 100, "status" : "Error in connection database"});
+          return;
+        }   
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query("select * from user",function(err,rows){
+            connection.release();
+            if(!err) {
+                res.json(rows);
+            }           
+        });
+
+        connection.on('error', function(err) {      
+              res.json({"code" : 100, "status" : "Error in connection database"});
+              return;     
+        });
+  });
+}
 
 function sendPromocaoDia(recipientId) {
 
