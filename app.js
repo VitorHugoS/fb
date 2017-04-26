@@ -694,8 +694,7 @@ function sendReceiptMessage(recipientId) {
 
 
 
-
-function sendPromocaoDia(recipientId) {
+/*function sendPromocaoDia(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -721,8 +720,28 @@ function sendPromocaoDia(recipientId) {
 };
 
   callSendAPI(messageData);
+}*/
 
-
+function sendPromocaoDia(recipientId) {
+  request.post(
+    'http://atasistema.com.br/api/',
+    { json: { key: 'usuarios' } },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var mensagem=body;
+        }
+    }
+);
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: body,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+  callSendAPI(messageData);
 }
 
 /*
