@@ -19,13 +19,13 @@ const
   request = require('request');
 
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-    host     : 'robb0377.publiccloud.com.br',
-    user     : 'atade_intranet',
-    password : 'A25FCD7F@!',
-    database : 'atadesig2_intranet',
-});
+//var mysql      = require('mysql');
+//var connection = mysql.createConnection({
+//    host     : 'robb0377.publiccloud.com.br',
+//    user     : 'atade_intranet',
+//    password : 'A25FCD7F@!',
+//    database : 'atadesig2_intranet',
+//});
 
 
 
@@ -155,14 +155,14 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-    connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-    console.log('connected as id ' + connection.threadId);
-  });
-
+  //  connection.connect(function(err) {
+  //if (err) {
+  //  console.error('error connecting: ' + err.stack);
+  //  return;
+  //}
+  //  console.log('connected as id ' + connection.threadId);
+  //});
+  res.send("ola");
 });
 
 /*
@@ -744,31 +744,6 @@ function sendReceiptMessage(recipientId) {
   callSendAPI(messageData);
 }*/
 
-
-function handle_database(req,res) {
-
-    pool.getConnection(function(err,connection){
-        if (err) {
-          connection.release();
-          res.json({"code" : 100, "status" : "Error in connection database"});
-          return;
-        }   
-
-        console.log('connected as id ' + connection.threadId);
-
-        connection.query("select * from user",function(err,rows){
-            connection.release();
-            if(!err) {
-                res.json(rows);
-            }           
-        });
-
-        connection.on('error', function(err) {      
-              res.json({"code" : 100, "status" : "Error in connection database"});
-              return;     
-        });
-  });
-}
 
 function sendPromocaoDia(recipientId) {
 
