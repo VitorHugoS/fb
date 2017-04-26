@@ -17,6 +17,43 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request');
+  mysql      = require('mysql');
+
+
+var pool      =    mysql.createPool({
+    connectionLimit : 100, //important
+    host     : 'robb0377.publiccloud.com.br;port=3306',
+    user     : 'atade_intranet',
+    password : 'A25FCD7F@!',
+    database : 'atadesig2_intranet',
+    debug    :  false
+});
+
+function handle_database(req,res) {
+
+    pool.getConnection(function(err,connection){
+        if (err) {
+          connection.release();
+          res.json({"code" : 100, "status" : "Error in connection database"});
+          return;
+        }   
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query("select * from user",function(err,rows){
+            connection.release();
+            if(!err) {
+                res.json(rows);
+            }           
+        });
+
+        connection.on('error', function(err) {      
+              res.json({"code" : 100, "status" : "Error in connection database"});
+              return;     
+        });
+  });
+}
+
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -143,11 +180,7 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-
-    request('http://atasistema.com.br/api/index.php', function (error, response, body) {
-
-  res.write('body:', body); // Print the HTML for the Google homepage. 
-});
+    handle_database(req,res);
 });
 
 /*
