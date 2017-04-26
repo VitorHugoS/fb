@@ -722,15 +722,15 @@ function sendReceiptMessage(recipientId) {
   callSendAPI(messageData);
 }*/
 
-function sendPromocaoDia(recipientId) { 
-  request.post({
-  headers: {'content-type' : 'application/x-www-form-urlencoded'},
-  url:     'http://atasistema.com.br/api/',
-  body:    "request=usuarios"
-}, function(error, response, body){
-    var mensagem=body;
-});
+function sendPromocaoDia(recipientId) {
 
+
+request.post({
+  url:     'http://atasistema.com.br/api/index.php',
+  form:    { chamada: "usuarios" }
+}, function(error, response, body){
+  var mensagem=body;
+});
 
   var messageData = {
     recipient: {
