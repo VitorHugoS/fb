@@ -143,9 +143,11 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-    request.post({url:'http://atasistema.com.br/api/index.php', form: {chamada:'usuarios'}}, function(err,httpResponse,body){ 
-        res.write(httpResponse);
-    });
+
+    request('http://atasistema.com.br/api/index.php', function (error, response, body) {
+
+  res.write('body:', body); // Print the HTML for the Google homepage. 
+});
 });
 
 /*
