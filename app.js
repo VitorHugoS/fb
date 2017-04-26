@@ -17,16 +17,14 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request');
-  mysql      = require('mysql');
 
 
-var pool      =    mysql.createPool({
-    connectionLimit : 100, //important
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
     database : 'atadesig2_intranet',
-    debug    :  false
 });
 
 
@@ -157,7 +155,14 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-    handle_database(req,res);
+    connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+    console.log('connected as id ' + connection.threadId);
+  });
+
 });
 
 /*
