@@ -1,7 +1,7 @@
 <?php
 require("db/db.php");
 
-$requisicao=json_decode($_POST["ataapi"]);
+$requisicao=$_POST["request"];
 
 switch ($requisicao) {
 	case 'usuarios':

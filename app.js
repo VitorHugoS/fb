@@ -722,22 +722,16 @@ function sendReceiptMessage(recipientId) {
   callSendAPI(messageData);
 }*/
 
-function sendPromocaoDia(recipientId) {
-  var dado = { ataapi: "usuarios"}
-  request({
-    uri: 'http://atasistema.com.br/api/',
-    method: 'POST',
-    json: dado
+function sendPromocaoDia(recipientId) { 
+  request.post({
+  headers: {'content-type' : 'application/x-www-form-urlencoded'},
+  url:     'http://atasistema.com.br/api/',
+  body:    "request=usuarios"
+}, function(error, response, body){
+    var mensagem=body;
+});
 
-  }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-     
-    } else {
-      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
-    }
-  });  
 
-  
   var messageData = {
     recipient: {
       id: recipientId
