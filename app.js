@@ -723,21 +723,13 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 function sendPromocaoDia(recipientId) {
-  request.post(
-    'http://atasistema.com.br/api/',
-    { json: { key: 'usuarios' } },
-    function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var mensagem=body;
-        }
-    }
-);
+
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: mensagem,
+      text: "teste",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
