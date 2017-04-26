@@ -723,13 +723,27 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 function sendPromocaoDia(recipientId) {
+  var dado = { ataapi: "usuarios"}
+  request({
+    uri: 'http://atasistema.com.br/api/',
+    method: 'POST',
+    json: dado
 
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+     
+    } else {
+      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+    }
+  });  
+
+  
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "teste",
+      text: mensagem,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
