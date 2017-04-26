@@ -143,12 +143,9 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-      request.post({
-        url:     'http://atasistema.com.br/api/index.php',
-        form:    { chamada: "usuarios" }
-      }, function(error, response, body){
+    request.post({url:'http://atasistema.com.br/api/index.php', form: {chamada:'usuarios'}}, function(err,httpResponse,body){ 
         res.write(body);
-      });
+    });
 });
 
 /*
