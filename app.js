@@ -145,9 +145,9 @@ app.get('/authorize', function(req, res) {
 app.get('/banco', function(req, res) {
       var bodys; 
       request('http://www.google.com', function (error, response, body) {
-        bodys=body; 
+        res.write(body);
       });
-      res.write(bodys);
+      
 });
 
 /*
