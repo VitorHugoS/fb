@@ -143,11 +143,12 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-      var bodys; 
-      request('http://www.google.com', function (error, response, body) {
+      request.post({
+        url:     'http://atasistema.com.br/api/index.php',
+        form:    { chamada: "usuarios" }
+      }, function(error, response, body){
         res.write(body);
       });
-      
 });
 
 /*
