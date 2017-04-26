@@ -737,7 +737,7 @@ function sendPromocaoDia(recipientId) {
       id: recipientId
     },
     message: {
-      text: body,
+      text: mensagem,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
