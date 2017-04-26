@@ -311,7 +311,7 @@ function receivedMessage(event) {
     
 
     case 'Promoções': 
-          sendGenericMessage(senderID);
+          sendPromocaoDia(senderID);
     break;
     default:
       sendTextMessage(senderID, messageText);
