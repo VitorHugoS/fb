@@ -573,7 +573,6 @@ function buscaUltimo(recipientId){
     connection.connect();
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         { 
-            res.json(rows);
 
             mensagem=rows[0].titulo+"<br>"+rows[0].texto;
             console.log(mensagem);
