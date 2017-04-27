@@ -575,8 +575,7 @@ function buscaUltimo(recipientId){
         { 
 
             mensagem=rows[0].titulo+"<br>"+rows[0].texto;
-            console.log(mensagem);
-             //sendRecados(recipientId, rows);
+            sendRecados(recipientId, mensagem);
         }); 
     connection.end();
  }
