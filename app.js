@@ -910,6 +910,3 @@ app.listen(app.get('port'), function() {
 });
 
 module.exports = app;
-
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
