@@ -17,10 +17,9 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request');
-
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
+  mysql      = require('mysql');
+  
+const connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
@@ -757,23 +756,23 @@ function sendRecados(recipientId) {
   }); 
   if(recados){
     var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "Você tem novos recados!",
-      metadata: "DEVELOPER_DEFINED_METADATA"
-    }
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: "Você tem novos recados!",
+        metadata: "DEVELOPER_DEFINED_METADATA"
+      }
     };
   }else{
     var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "Nenhum recado!",
-      metadata: "DEVELOPER_DEFINED_METADATA"
-    }
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: "Nenhum recado!",
+        metadata: "DEVELOPER_DEFINED_METADATA"
+      }
    };
   }
   callSendAPI(messageData);
