@@ -242,6 +242,9 @@ function receivedAuthentication(event) {
  * then we'll simply confirm that we've received the attachment.
  * 
  */
+
+
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -336,8 +339,8 @@ function receivedMessage(event) {
 
     
 
-    case 'Promoções': 
-          sendPromocaoDia(senderID);
+    case 'recados': 
+          buscaUltimo(senderID);
     break;
     default:
       sendTextMessage(senderID, messageText);
@@ -557,7 +560,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      text: "Palavras configuradas no momento [recados, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
@@ -565,6 +568,31 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+function buscaUltimo(recipientId){
+    var dado;
+    connection.connect();
+    connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
+        {
+             dado=rows;
+        }); 
+    connection.end();
+    sendRecados(recipientId, dado);
+ }
+
+
+function sendRecados(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+}
 /*
  * Send a button message using the Send API.
  *
