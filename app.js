@@ -155,19 +155,12 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-    connection.connect();
-    //var key = '_edit_lock'; 
-    var total;
-    var queryString = 'SELECT email FROM login';
-    connection.query(queryString, function(err, rows, fields) {
-      if (err) throw err;
-        for (var i in rows) {
-          console.log(rows[i]);
-          total++;
-        } 
-      });
-      res.send(total);
-      connection.end();
+   connection.query('SELECT * FROM login', function(err, rows, fields)
+    {
+        res.render('login', {
+          items: rows
+        });
+    });
 });
 
 /*
