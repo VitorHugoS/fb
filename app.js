@@ -333,7 +333,7 @@ function receivedMessage(event) {
 
     
 
-    case 'Promoções': 
+    case 'Recados': 
           sendPromocaoDia(senderID);
     break;
     default:
@@ -554,7 +554,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      text: "Palavras configuradas no momento [Recados, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
@@ -746,25 +746,36 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 
-function sendPromocaoDia(recipientId) {
-
-
-request.post({
-  url:     'http://atasistema.com.br/api/index.php',
-  form:    { chamada: "usuarios" }
-}, function(error, response, body){
-  var mensagem=body;
-});
-
-  var messageData = {
+function sendRecados(recipientId) {
+  var recados; 
+  connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
+  {
+                console.log('Connection result error '+err);
+                console.log('no of records is '+rows.length);
+                //res.writeHead(200, { 'Content-Type': 'application/json'});
+                recados=JSON.stringify(rows);
+  }); 
+  if(recados){
+    var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: mensagem,
+      text: "Você tem novos recados!",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
-  };
+    };
+  }else{
+    var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Nenhum recado!",
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+   };
+  }
   callSendAPI(messageData);
 }
 
