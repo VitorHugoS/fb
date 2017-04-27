@@ -157,10 +157,10 @@ app.get('/authorize', function(req, res) {
 app.get('/banco', function(req, res) {
   connection.connect(function(err) {
     if (err) {
-      res.send('error connecting: ' + err.stack);
+      console.send('error connecting: ' + err.stack);
       return;
     }
-      res.send('connected as id ' + connection.threadId);
+      console.send('connected as id ' + connection.threadId);
     });
     var queryString="Select * from login";
     connection.query(queryString, function(err, rows, fields) {
