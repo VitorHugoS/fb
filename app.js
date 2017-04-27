@@ -162,15 +162,14 @@ app.get('/banco', function(req, res) {
     }
       res.send('connected as id ' + connection.threadId);
     });
+    var queryString="Select * from login";
+    connection.query(queryString, function(err, rows, fields) {
+          res.writeHead(200, { 'Content-Type': 'application/json'});
+          res.send(JSON.stringify(rows));
+        });
 
-  //var queryString="Select * from login order by id desc";
-  //      connection.query(queryString, function(err, rows, fields) {
-  //      if (err) throw err;
- //
-//        for (var i in rows) {
-//            res.send('Post Titles: ', rows[i].post_title);
-//        }
-//        });
+    connection.end(function (err) {
+    });
   
 });
 
