@@ -161,8 +161,14 @@ app.get('/banco', function(req, res) {
       console.error('error connecting: ' + err.stack);
       return;
     }
-      res.send("ola" + connection.threadId);
-      console.log('connected as id ' + connection.threadId);
+      var "Select * from login order by id desc";
+      connection.query(queryString, function(err, rows, fields) {
+        if (err) throw err;
+ 
+        for (var i in rows) {
+            res.send('Post Titles: ', rows[i].post_title);
+        }
+        });
     });
   
 });
