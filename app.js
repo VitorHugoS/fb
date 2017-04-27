@@ -157,16 +157,16 @@ app.get('/authorize', function(req, res) {
 app.get('/banco', function(req, res) {
     connection.connect();
     //var key = '_edit_lock'; 
-    var texto = "";
+    var total;
     var queryString = 'SELECT email FROM login';
     connection.query(queryString, [key], function(err, rows, fields) {
       if (err) throw err;
         for (var i in rows) {
           console.log(rows[i]);
-          text = text + rows[i];
+          total++;
         } 
       });
-      res.send(text);
+      res.send(total);
       connection.end();
 });
 
