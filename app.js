@@ -19,13 +19,13 @@ const
   request = require('request');
 
 
-//var mysql      = require('mysql');
-//var connection = mysql.createConnection({
-//    host     : 'robb0377.publiccloud.com.br',
-//    user     : 'atade_intranet',
-//    password : 'A25FCD7F@!',
-//    database : 'atadesig2_intranet',
-//});
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host     : 'robb0377.publiccloud.com.br',
+    user     : 'atade_intranet',
+    password : 'A25FCD7F@!',
+    database : 'atadesig2_intranet',
+});
 
 
 
