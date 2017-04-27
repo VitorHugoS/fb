@@ -155,7 +155,7 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
+    connection.query('SELECT * from recados where id_usuario=1', function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
                 console.log('no of records is '+rows.length);
@@ -163,6 +163,7 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
+
 });
 
 /*
@@ -746,15 +747,6 @@ function sendReceiptMessage(recipientId) {
 
 
 function sendPromocaoDia(recipientId) {
-
-
-request.post({
-  url:     'http://atasistema.com.br/api/index.php',
-  form:    { chamada: "usuarios" }
-}, function(error, response, body){
-  var mensagem=body;
-});
-
   var messageData = {
     recipient: {
       id: recipientId
