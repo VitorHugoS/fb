@@ -748,14 +748,6 @@ function sendReceiptMessage(recipientId) {
 
 function sendPromocaoDia(recipientId) {
 
-
-request.post({
-  url:     'http://atasistema.com.br/api/index.php',
-  form:    { chamada: "usuarios" }
-}, function(error, response, body){
-  var mensagem=body;
-});
-
   var messageData = {
     recipient: {
       id: recipientId
