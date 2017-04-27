@@ -19,8 +19,8 @@ const
   request = require('request');
 
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
+const mysql      = require('mysql');
+const connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
@@ -155,15 +155,13 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    connection.query('SELECT * from recados where id_usuario=1, concluido=0', function(err, rows, fields)
-        {
+    connection.query('SELECT * from recados where id_usuario=1, concluido=1', function(err, rows, fields){
                 console.log('Connection result error '+err);
                 console.log('no of records is '+rows.length);
                 res.writeHead(200, { 'Content-Type': 'application/json'});
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
-
 });
 
 /*
