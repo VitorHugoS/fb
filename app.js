@@ -157,20 +157,20 @@ app.get('/authorize', function(req, res) {
 app.get('/banco', function(req, res) {
   connection.connect(function(err) {
     if (err) {
-      console.error('error connecting: ' + err.stack);
+      res.send('error connecting: ' + err.stack);
       return;
     }
-      console.log('connected as id ' + connection.threadId);
+      res.send('connected as id ' + connection.threadId);
     });
 
-  var queryString="Select * from login order by id desc";
-        connection.query(queryString, function(err, rows, fields) {
-        if (err) throw err;
- 
-        for (var i in rows) {
-            res.send('Post Titles: ', rows[i].post_title);
-        }
-        });
+  //var queryString="Select * from login order by id desc";
+  //      connection.query(queryString, function(err, rows, fields) {
+  //      if (err) throw err;
+ //
+//        for (var i in rows) {
+//            res.send('Post Titles: ', rows[i].post_title);
+//        }
+//        });
   
 });
 
