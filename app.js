@@ -155,14 +155,16 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/banco', function(req, res) {
-  //  connection.connect(function(err) {
-  //if (err) {
-  //  console.error('error connecting: ' + err.stack);
-  //  return;
-  //}
-  //  console.log('connected as id ' + connection.threadId);
-  //});
-  res.send("ola");
+  connection.connect(function(err) {
+    if (err) {
+      res.send("ola" + err.stack);
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+      res.send("ola" + connection.threadId);
+      console.log('connected as id ' + connection.threadId);
+    });
+  
 });
 
 /*
