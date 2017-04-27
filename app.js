@@ -156,7 +156,7 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    var condicoes = {concluido: 0, id_usuario: 1}
+    var condicoes = {"concluido": 0, "id_usuario:": 1}
     connection.query('SELECT * from recados WHERE ?', [condicoes], function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
