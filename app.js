@@ -572,7 +572,8 @@ function buscaUltimo(recipientId){
     connection.connect();
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         {
-             sendRecados(recipientId, rows);
+            console.log(rows);
+             //sendRecados(recipientId, rows);
         }); 
     connection.end();
  }
