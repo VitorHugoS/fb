@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -19,8 +20,8 @@ const
   request = require('request');
 
 
-const mysql      = require('mysql');
-const connection = mysql.createConnection({
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
@@ -155,13 +156,15 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    connection.query('SELECT * from recados where id_usuario=1, concluido=1', function(err, rows, fields){
+    connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
+        {
                 console.log('Connection result error '+err);
                 console.log('no of records is '+rows.length);
                 res.writeHead(200, { 'Content-Type': 'application/json'});
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
+
 });
 
 /*
@@ -739,12 +742,20 @@ function sendReceiptMessage(recipientId) {
     }
   }
 };
-
   callSendAPI(messageData);
 }*/
 
 
 function sendPromocaoDia(recipientId) {
+
+
+request.post({
+  url:     'http://atasistema.com.br/api/index.php',
+  form:    { chamada: "usuarios" }
+}, function(error, response, body){
+  var mensagem=body;
+});
+
   var messageData = {
     recipient: {
       id: recipientId
@@ -908,3 +919,5 @@ app.listen(app.get('port'), function() {
 
 module.exports = app;
 
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
