@@ -333,7 +333,7 @@ function receivedMessage(event) {
     
 
     case 'Recados': 
-          sendPromocaoDia(senderID);
+          sendRecados(senderID);
     break;
     default:
       sendTextMessage(senderID, messageText);
