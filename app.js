@@ -586,7 +586,7 @@ function sendRecados(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      text: messageText,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
