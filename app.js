@@ -161,7 +161,7 @@ app.get('/banco', function(req, res) {
       console.error('error connecting: ' + err.stack);
       return;
     }
-      var "Select * from login order by id desc";
+      var queryString="Select * from login order by id desc";
       connection.query(queryString, function(err, rows, fields) {
         if (err) throw err;
  
