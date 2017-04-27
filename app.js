@@ -20,13 +20,13 @@ const
   request = require('request');
 
 
-//var mysql      = require('mysql');
-//var connection = mysql.createConnection({
-//    host     : 'robb0377.publiccloud.com.br',
-//    user     : 'atade_intranet',
-//    password : 'A25FCD7F@!',
-//    database : 'atadesig2_intranet',
-//});
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host     : 'robb0377.publiccloud.com.br',
+    user     : 'atade_intranet',
+    password : 'A25FCD7F@!',
+    database : 'atadesig2_intranet',
+});
 
 
 
@@ -156,14 +156,14 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-   // connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
-   //     {
-   //             console.log('Connection result error '+err);
-   //            console.log('no of records is '+rows.length);
-    //            res.writeHead(200, { 'Content-Type': 'application/json'});
-   //             res.end(JSON.stringify(rows));
-    //            res.end();
-    //    }); 
+    connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
+        {
+                console.log('Connection result error '+err);
+               console.log('no of records is '+rows.length);
+                res.writeHead(200, { 'Content-Type': 'application/json'});
+                res.end(JSON.stringify(rows));
+                res.end();
+        }); 
 
 });
 
