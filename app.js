@@ -159,7 +159,7 @@ app.get('/banco', function(req, res) {
     //var key = '_edit_lock'; 
     var total;
     var queryString = 'SELECT email FROM login';
-    connection.query(queryString, [key], function(err, rows, fields) {
+    connection.query(queryString, function(err, rows, fields) {
       if (err) throw err;
         for (var i in rows) {
           console.log(rows[i]);
