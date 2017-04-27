@@ -154,13 +154,16 @@ app.get('/authorize', function(req, res) {
   });
 });
 
-app.get('/banco', function(req, res) {
-   connection.query('SELECT * FROM login', function(err, rows, fields)
-    {
-        res.render('login', {
-          items: rows
-        });
-    });
+app.get('/login', function(req, res) {
+    connection.query('SELECT * from login', function(err, rows, fields)
+        {
+                console.log('Connection result error '+err);
+                console.log('no of records is '+rows.length);
+                res.writeHead(200, { 'Content-Type': 'application/json'});
+                res.end(JSON.stringify(rows));
+                res.end();
+        }); 
+
 });
 
 /*
