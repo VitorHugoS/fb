@@ -155,7 +155,7 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    connection.query('SELECT * from recados WHERE concluido=0', function(err, rows, fields)
+    connection.query('SELECT * from recados WHERE concluido=0 AND id_usuario=1', function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
                 console.log('no of records is '+rows.length);
