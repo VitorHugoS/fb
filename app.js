@@ -17,9 +17,10 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request');
-  mysql      = require('mysql');
-  
-const connection = mysql.createConnection({
+
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
@@ -332,8 +333,8 @@ function receivedMessage(event) {
 
     
 
-    case 'Recados': 
-          sendRecados(senderID);
+    case 'Promoções': 
+          sendPromocaoDia(senderID);
     break;
     default:
       sendTextMessage(senderID, messageText);
@@ -553,7 +554,7 @@ function sendTextMessage(recipientId, messageText) {
       id: recipientId
     },
     message: {
-      text: "Palavras configuradas no momento [Recados, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      text: "Palavras configuradas no momento [Promoções, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
@@ -745,36 +746,25 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 
-function sendRecados(recipientId) {
-  var recados; 
-  connection.query('SELECT * from recados WHERE concluido=0, id_usuario=1', function(err, rows, fields)
-  {
-                console.log('Connection result error '+err);
-                console.log('no of records is '+rows.length);
-                //res.writeHead(200, { 'Content-Type': 'application/json'});
-                recados=JSON.stringify(rows);
-  }); 
-  if(recados){
-    var messageData = {
-      recipient: {
-        id: recipientId
-      },
-      message: {
-        text: "Você tem novos recados!",
-        metadata: "DEVELOPER_DEFINED_METADATA"
-      }
-    };
-  }else{
-    var messageData = {
-      recipient: {
-        id: recipientId
-      },
-      message: {
-        text: "Nenhum recado!",
-        metadata: "DEVELOPER_DEFINED_METADATA"
-      }
-   };
-  }
+function sendPromocaoDia(recipientId) {
+
+
+request.post({
+  url:     'http://atasistema.com.br/api/index.php',
+  form:    { chamada: "usuarios" }
+}, function(error, response, body){
+  var mensagem=body;
+});
+
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: mensagem,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
   callSendAPI(messageData);
 }
 
