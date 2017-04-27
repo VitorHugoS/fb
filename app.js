@@ -569,14 +569,12 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 function buscaUltimo(recipientId){
-    var dado;
     connection.connect();
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         {
-             dado=rows;
+             sendRecados(recipientId, rows);
         }); 
     connection.end();
-    sendRecados(recipientId, dado);
  }
 
 
