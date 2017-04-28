@@ -318,6 +318,22 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
+    switch(quickReplyPayload){
+        case 'recados':
+          sendTextMessage(senderID, "Recados");
+        break;
+        case 'sempresas':
+          sendTextMessage(senderID, "Buscar Empresas");
+        break;
+        case 'sclientes':
+          sendTextMessage(senderID, "Buscar Clientes");
+        break;
+        default:
+          startConversation(senderID);
+        break;
+
+    }
+
     sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -386,7 +402,7 @@ function receivedMessage(event) {
           buscaUltimo(senderID);
     break;
     default:
-      sendTextMessage(senderID, messageText);
+      startConversation(senderID);
     
     }
   } else if (messageAttachments) {
@@ -838,6 +854,37 @@ function sendReceiptMessage(recipientId) {
 };
   callSendAPI(messageData);
 }*/
+
+function startConversation(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Olá, selecione uma opção para ter acesso aos nossos recursos.",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"Meus Recados",
+          "payload":"recados"
+        },
+        {
+          "content_type":"text",
+          "title":"Buscar Empresas",
+          "payload":"sempresas"
+        },
+        {
+          "content_type":"text",
+          "title":"Buscar Cliente",
+          "payload":"sclientes"
+        }
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
 
 
 function sendPromocaoDia(recipientId) {
