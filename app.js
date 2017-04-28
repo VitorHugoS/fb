@@ -606,16 +606,13 @@ function sendHello(recipientId) {
 
 function buscaUltimo(recipientId){
     var mensagem;
-    connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1 order by `id` desc limit 5', [], function(err, rows, fields)
+    connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         { 
            for (var i in rows) {
             sendRecados(recipientId, "Id: "+rows[i].hash);
             sendRecados(recipientId, "Recado: "+rows[i].titulo);
             sendRecados(recipientId, "Mensagem: "+rows[i].titulo);
            }
-        }
-
-            
         }); 
  }
 
