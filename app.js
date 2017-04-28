@@ -326,7 +326,7 @@ function receivedMessage(event) {
           sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
         break;
         case 'sclientes':
-          sendText(senderID, "Para consultar um cliente digite ##nomedocliente");
+          sendText(senderID, "Para consultar um cliente digite @nomedocliente");
         break;
         default:
           startConversation(senderID);
@@ -339,10 +339,12 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-    if(messageText.contains("#")){
+    var empresa=messageText.indexOf("#") > -1;
+    var cliente=messageText.indexOf("@") > -1;
+    if(empresa){
         sendText(senderID, "Buscar empresa");
     }
-    if(messageText.contains("##")){
+    if(cliente){
       sendText(senderID, "Buscar cliente");
     }
 
