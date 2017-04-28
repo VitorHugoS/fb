@@ -320,13 +320,13 @@ function receivedMessage(event) {
 
     switch(quickReplyPayload){
         case 'recados':
-          sendTextMessage(senderID, "Recados");
+          buscaUltimo(senderID);
         break;
         case 'sempresas':
-          sendTextMessage(senderID, "Buscar Empresas");
+          sendText(senderID, "Buscar Empresas");
         break;
         case 'sclientes':
-          sendTextMessage(senderID, "Buscar Clientes");
+          sendText(senderID, "Buscar Clientes");
         break;
         default:
           startConversation(senderID);
@@ -403,7 +403,7 @@ function receivedMessage(event) {
     break;
     default:
       startConversation(senderID);
-    
+    break;
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -628,6 +628,20 @@ function sendTextMessage(recipientId, messageText) {
     },
     message: {
       text: "Palavras configuradas no momento [recados, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendText(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
