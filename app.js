@@ -323,7 +323,7 @@ function receivedMessage(event) {
           buscaUltimo(senderID);
         break;
         case 'sempresas':
-          sendText(senderID, "Buscar Empresas");
+          sendText(senderID, "Digite o nome da empresa que deseja consultar!");
         break;
         case 'sclientes':
           sendText(senderID, "Buscar Clientes");
@@ -334,7 +334,7 @@ function receivedMessage(event) {
 
     }
 
-    sendTextMessage(senderID, "Quick reply tapped");
+    //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
 
