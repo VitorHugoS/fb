@@ -157,7 +157,6 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
@@ -166,7 +165,23 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
-  
+});
+
+app.get('/config', function(req, res) {
+  var messageData = {
+    setting_type: "greeting",
+    setting_type: {
+      text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!"
+      }
+    };
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    json: messageData
+
+  }, function (error, response, body) {
+      res.end(body);
+  });  
 
 });
 
