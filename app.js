@@ -342,7 +342,7 @@ function receivedMessage(event) {
     var empresa=messageText.indexOf("#") > -1;
     var cliente=messageText.indexOf("@") > -1;
     if(empresa){
-        trata=messageText.replace("#","");
+        var trata=messageText.replace("#","");
         buscarEmpresa(senderID, trata);
     }
     if(cliente){
