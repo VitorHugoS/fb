@@ -463,7 +463,7 @@ function receivedPostback(event) {
       sendHello(senderID, "Postback called");
     break;
     default:
-      sendTextMessage(senderID, "Postback called");
+      //sendTextMessage(senderID, "Postback called");
     break;
   }
   
