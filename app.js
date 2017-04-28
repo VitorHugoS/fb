@@ -163,9 +163,6 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
-    connection.release();
-    //connection.end();
-
 });
 
 /*
