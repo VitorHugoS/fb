@@ -632,9 +632,7 @@ function buscaUltimo(recipientId){
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1 order by `id` desc limit 5', [], function(err, rows, fields)
         { 
            for (var i in rows) {
-            sendRecados(recipientId, "Mensagem: "+rows[i].mensagem);
-            sendRecados(recipientId, "Recado: "+rows[i].titulo);
-            sendRecados(recipientId, "Id: "+rows[i].hash);
+            sendRecados(recipientId, "Id: "+rows[i].hash+"<center></center>Título: "+rows[i].titulo+"<center></center>Recado: "+rows[i].texto);
            }
         }); 
  }
