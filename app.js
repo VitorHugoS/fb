@@ -204,7 +204,7 @@ app.get('/config2', function(req, res) {
  request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
-    json: {setting_type: "call_to_actions", thread_state: "new_thread", call_to_actions: { payload: "BOTAO_INICIO" }}}, function (error, response, body) {
+    json: {setting_type: "call_to_actions", thread_state: "new_thread", call_to_actions: [{ payload: "BOTAO_INICIO" }]}}, function (error, response, body) {
      // res.send("ala");
   });  
 
