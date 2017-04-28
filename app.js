@@ -27,6 +27,10 @@ var connection = mysql.createConnection({
     password : 'A25FCD7F@!',
     database : 'atadesig2_intranet',
 });
+connection.connect(function(err) {
+  if (err) throw err
+  
+});
 
 
 
@@ -165,7 +169,7 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
-    connection.release();
+    //connection.release();
     //connection.end();
 
 });
