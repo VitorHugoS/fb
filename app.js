@@ -165,6 +165,7 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
+    connection.release();
     //connection.end();
 
 });
@@ -577,6 +578,7 @@ function buscaUltimo(recipientId){
             mensagem=rows[0].titulo+"<br>"+rows[0].texto;
             sendRecados(recipientId, mensagem);
         }); 
+    connection.release();
     //connection.end();
  }
 
