@@ -27,10 +27,7 @@ var connection = mysql.createConnection({
     password : 'A25FCD7F@!',
     database : 'atadesig2_intranet',
 });
-connection.connect(function(err) {
-  if (err) throw err
-  
-});
+
 
 
 
@@ -160,7 +157,10 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    //connection.connect();
+    connection.connect(function(err) {
+    if (err) throw err
+  
+    });
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
@@ -170,7 +170,7 @@ app.get('/login', function(req, res) {
                 res.end();
         }); 
     //connection.release();
-    //connection.end();
+    connection.end();
 
 });
 
