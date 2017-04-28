@@ -168,7 +168,7 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/config2', function(req, res) {
-    
+    res.end("tet");
 });
 
 
