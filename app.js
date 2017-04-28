@@ -171,7 +171,13 @@ app.get('/config', function(req, res) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
-    json: {setting_type: "greeting", greeting: { text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!" }}}, function (error, response, body) {
+    json: {setting_type: "greeting", greeting: { text: "Bem vindo ao auto atendimento. Para começar clique no botão abaixo!" }}}, function (error, response, body) {
+      //res.send("ala");
+  });  
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    json: {setting_type: "call_to_actions", thread_state: "new_thread", call_to_actions: { payload: "BOTAO_INICIO" }}}, function (error, response, body) {
       res.send("ala");
   });  
 
@@ -407,7 +413,15 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+  switch(payload){
+    case 'BOTAO_INICIO':
+      sendHello(senderID, "Postback called");
+    break;
+    default:
+      sendTextMessage(senderID, "Postback called");
+    break;
+  }
+  
 }
 
 /*
@@ -569,6 +583,20 @@ function sendTextMessage(recipientId, messageText) {
     },
     message: {
       text: "Palavras configuradas no momento [recados, image, audio, gif, video, receipt, quick reply, read receipt, typing on, typing off]",
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendHello(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Conversa Inicial",
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
