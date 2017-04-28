@@ -133,6 +133,8 @@ app.post('/webhook', function (req, res) {
   }
 });
 
+
+
 /*
  * This path is used for account linking. The account linking call-to-action
  * (sendAccountLinking) is pointed to this URL. 
@@ -164,6 +166,20 @@ app.get('/login', function(req, res) {
                 //res.end();
         }); 
 });
+
+app.get('/config', function(req, res) {
+    request({
+    uri: "https://graph.facebook.com/v2.6/me/thread_settings?access_token="+PAGE_ACCESS_TOKEN,
+    method: "POST",
+    json: {
+      setting_type: "greeting",
+      greeting: {
+        text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!"
+      }
+    }
+  });
+});
+
 
 /*
  * Verify that the callback came from Facebook. Using the App Secret from 
@@ -905,6 +921,7 @@ function sendAccountLinking(recipientId) {
  * get the message id in a response 
  *
  */
+
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
