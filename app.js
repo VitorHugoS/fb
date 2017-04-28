@@ -167,13 +167,8 @@ app.get('/login', function(req, res) {
         }); 
 });
 
-app.get('/login2', function(req, res) {
-    connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
-        {
-                res.writeHead(200, { 'Content-Type': 'application/json'});
-                res.end(JSON.stringify(rows));
-                //res.end();
-        }); 
+app.get('/teste', function (req, res) {
+  res.send('GET request to the homepage');
 });
 
 
