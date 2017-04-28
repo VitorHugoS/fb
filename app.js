@@ -677,8 +677,8 @@ function buscaUltimo(recipientId){
         }); 
  }
 function buscarEmpresa(recipientId, text){
-    var mensagem;
-    connection.query('SELECT * from `empresa` WHERE empresa LIKE = "%'.text.'%"', [], function(err, rows, fields)
+    
+    connection.query('SELECT * from `empresa` WHERE empresa LIKE = "%?%"', [text], function(err, rows, fields)
         { 
             sendRecados(recipientId, "Empresas econtradas com este nome: \n");
            for (var i in rows) {
