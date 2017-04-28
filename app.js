@@ -323,10 +323,10 @@ function receivedMessage(event) {
           buscaUltimo(senderID);
         break;
         case 'sempresas':
-          sendText(senderID, "Digite o nome da empresa que deseja consultar!");
+          sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
         break;
         case 'sclientes':
-          sendText(senderID, "Buscar Clientes");
+          sendText(senderID, "Para consultar um cliente digite ##nomedocliente");
         break;
         default:
           startConversation(senderID);
@@ -339,6 +339,12 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
+    if(messageText.contains("#")){
+        sendText(senderID, "Buscar empresa");
+    }
+    if(messageText.contains("##")){
+      sendText(senderID, "Buscar cliente");
+    }
 
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
@@ -396,11 +402,6 @@ function receivedMessage(event) {
     //    sendAccountLinking(senderID);
     //    break;
 
-    
-
-    case 'recados': 
-          buscaUltimo(senderID);
-    break;
     default:
       startConversation(senderID);
     break;
