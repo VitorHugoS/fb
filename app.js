@@ -174,8 +174,7 @@ app.get('/config', function(req, res) {
     setting_type: {
       text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!"
       }
-    }
-  };
+    };
   request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
