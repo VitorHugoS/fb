@@ -167,6 +167,11 @@ app.get('/login', function(req, res) {
         }); 
 });
 
+app.get('/config2', function(req, res) {
+    
+});
+
+
 app.get('/config', function(req, res) {
     request({
     uri: "https://graph.facebook.com/v2.6/me/thread_settings?access_token="+PAGE_ACCESS_TOKEN,
