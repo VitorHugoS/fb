@@ -167,22 +167,24 @@ app.get('/login', function(req, res) {
         }); 
 });
 
-app.get('/teste', function (req, res) {
-  res.send('GET request to the homepage');
-});
-
 
 app.get('/config', function(req, res) {
-    request({
-    uri: "https://graph.facebook.com/v2.6/me/thread_settings?access_token="+PAGE_ACCESS_TOKEN,
-    method: "POST",
-    json: {
-      setting_type: "greeting",
-      greeting: {
-        text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!"
+  var messageData = {
+    setting_type: "greeting",
+    setting_type: {
+      text: "Olá {{user_fist_name}}, bem vindo ao auto atendimento. Para começar clique no botão abaixo!"
       }
     }
-  });
+  };
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    json: messageData
+
+  }, function (error, response, body) {
+      res.end(body);
+  });  
+
 });
 
 
