@@ -21,11 +21,16 @@ const
 
 
 var mysql      = require('mysql');
-
+var connection = mysql.createConnection({
+    host     : 'robb0377.publiccloud.com.br',
+    user     : 'atade_intranet',
+    password : 'A25FCD7F@!',
+    database : 'atadesig2_intranet',
+});
 
 
 function handleDisconnect() {
-  var connection = mysql.createConnection({
+  connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
     user     : 'atade_intranet',
     password : 'A25FCD7F@!',
@@ -50,7 +55,6 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
-
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
