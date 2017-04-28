@@ -613,7 +613,7 @@ function buscaUltimo(recipientId){
             mensagem=rows[0].titulo+"<br>"+rows[0].texto;
             sendRecados(recipientId, mensagem);
         }); 
-    connection.release();
+    //connection.release();
     //connection.end();
  }
 
