@@ -342,7 +342,8 @@ function receivedMessage(event) {
     var empresa=messageText.indexOf("#") > -1;
     var cliente=messageText.indexOf("@") > -1;
     if(empresa){
-        sendText(senderID, "Buscar empresa");
+        trata=messageText.replace("#","");
+        buscarEmpresa(senderID, trata);
     }
     if(cliente){
       sendText(senderID, "Buscar cliente");
@@ -672,6 +673,16 @@ function buscaUltimo(recipientId){
         { 
            for (var i in rows) {
             sendRecados(recipientId, "Id:"+rows[i].hash+"\nTítulo:"+rows[i].titulo+"\nRecado\n"+rows[i].texto);
+           }
+        }); 
+ }
+function buscarEmpresa(recipientId, text){
+    var mensagem;
+    connection.query('SELECT * from `empresa` WHERE empresa LIKE = "%'.text.'%"', [], function(err, rows, fields)
+        { 
+            sendRecados(recipientId, "Empresas econtradas com este nome: \n");
+           for (var i in rows) {
+            sendRecados(recipientId, "Empresa:"+rows[i].empresa+"\nTelefone1:"+rows[i].telefonemp1+"\nCelular:"+rows[i].celularemp+"\nEmail:"+rows[i].emailemp);
            }
         }); 
  }
