@@ -156,7 +156,7 @@ app.get('/authorize', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-    connection.connect();
+    //connection.connect();
     connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
         {
                 console.log('Connection result error '+err);
@@ -165,7 +165,7 @@ app.get('/login', function(req, res) {
                 res.end(JSON.stringify(rows));
                 res.end();
         }); 
-    connection.end();
+    //connection.end();
 
 });
 
