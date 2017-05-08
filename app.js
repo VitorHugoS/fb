@@ -511,7 +511,7 @@ function receivedPostback(event) {
   // let them know it was successful
   switch(payload){
     case 'BOTAO_INICIO':
-      sendHello(senderID, "Postback called");
+      startConversation(senderID);
     break;
     default:
       //sendTextMessage(senderID, "Postback called");
