@@ -450,6 +450,9 @@ function receivedMessage(event) {
     //    break;
 
     default:
+      if(metadata){
+        console.log(metada);
+      }
       startConversation(senderID);
     break;
     }
