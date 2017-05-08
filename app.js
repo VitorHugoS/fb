@@ -368,7 +368,7 @@ function receivedMessage(event) {
     switch(quickReplyPayload){
         case 'recados':
           buscaUltimo(senderID);
-          console.log(metadata);
+          startConversation(senderID);
         break;
         case 'sempresas':
           sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
