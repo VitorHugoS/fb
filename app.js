@@ -923,6 +923,12 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 function startConversation(recipientId) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
+    method: 'GET',
+    json: {}}, function (error, response, body) {
+      console.log(response);
+  });  
   var messageData = {
     recipient: {
       id: recipientId
