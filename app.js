@@ -931,7 +931,7 @@ function startConversation(recipientId) {
     method: 'GET',
     json: {}}, function (error, response, body) {
       //dados=JSON.stringify(response);
-      console.log(body);
+      console.log(body.first_name);
       nome=body.first_name;
       sobrenome=body.last_name;
   });  
