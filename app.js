@@ -353,7 +353,7 @@ function receivedMessage(event) {
       messageId, appId, metadata);
        switch(metadata){
         case 'buscaRecados':
-          startConversation(senderID);
+          console.log("estou aqui");
         break;
         default:
           //startConversation(senderID);
