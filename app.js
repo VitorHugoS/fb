@@ -743,8 +743,7 @@ function sendRecados(recipientId, messageText) {
     },
     message: {
       text: messageText,
-      metadata: "buscaRecados",
-      app_id:"10"
+      metadata: "buscaRecados"
     }
   };
 
