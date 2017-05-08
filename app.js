@@ -353,7 +353,7 @@ function receivedMessage(event) {
       messageId, appId, metadata);
        switch(metadata){
         case 'buscaRecados':
-          console.log("estou aqui");
+          sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
         break;
         default:
           //startConversation(senderID);
