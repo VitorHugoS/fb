@@ -351,14 +351,6 @@ function receivedMessage(event) {
     // Just logging message echoes to console
     console.log("Received echo for message %s and app %d with metadata %s", 
       messageId, appId, metadata);
-       switch(metadata){
-        case 'buscaRecados':
-         startConversation(senderID);
-        break;
-        default:
-          //startConversation(senderID);
-        break;
-      }
     return;
   } else if (quickReply) {
     var quickReplyPayload = quickReply.payload;
@@ -457,6 +449,14 @@ function receivedMessage(event) {
       startConversation(senderID);
     break;
     }
+    switch(metadata){
+        case 'buscaRecados':
+         startConversation(senderID);
+        break;
+        default:
+          //startConversation(senderID);
+        break;
+      }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
