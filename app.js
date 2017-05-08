@@ -734,8 +734,7 @@ function sendRecados(recipientId, messageText) {
     },
     message: {
       text: messageText,
-      mid:"000001e2",
-      metadata: "DEVELOPER_DEFINED_METADATA"
+      metadata: "buscaRecados"
     }
   };
 
