@@ -215,7 +215,7 @@ app.get('/config3', function(req, res) {
  request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
-    json: {persistent_menu[{
+    json: {persistent_menu:[{
       locale: "default",
       composer_input_disabled:"true",
       call_to_actions:[{
