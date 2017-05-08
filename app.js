@@ -930,17 +930,12 @@ function startConversation(recipientId) {
     uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
     method: 'GET',
     json: {}}, function (error, response, body) {
-      //dados=JSON.stringify(response);
-      console.log(body.first_name);
-      nome=body.first_name;
-      sobrenome=body.last_name;
-  });  
-  var messageData = {
+    var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "Olá "+nome+" "+sobrenome+", selecione uma opção para ter acesso aos nossos recursos.",
+      text: "Olá "+body.first_name+" "+body.last_name+", selecione uma opção para ter acesso aos nossos recursos.",
       quick_replies: [
         {
           "content_type":"text",
@@ -960,8 +955,8 @@ function startConversation(recipientId) {
       ]
     }
   };
-
   callSendAPI(messageData);
+  });
 }
 
 
