@@ -360,10 +360,17 @@ function receivedMessage(event) {
     switch(quickReplyPayload){
         case 'recados':
           buscaUltimo(senderID);
+         }
 
         break;
         case 'sempresas':
-          sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
+          
+          buscaEmpresa(senderID, "Digite o nome da empresa:");
+          switch(metadata){
+            case "buscaEmpresa":
+            console.log(messageText);
+            break;
+          }
         break;
         case 'sclientes':
           sendText(senderID, "Para consultar um cliente digite @nomedocliente");
@@ -449,14 +456,6 @@ function receivedMessage(event) {
       startConversation(senderID);
     break;
     }
-    switch(metadata){
-        case 'buscaRecados':
-         startConversation(senderID);
-        break;
-        default:
-          //startConversation(senderID);
-        break;
-      }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
@@ -695,6 +694,20 @@ function sendText(recipientId, messageText) {
     message: {
       text: messageText,
       metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function buscaEmpresa(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
+      metadata: "buscarEmpresa"
     }
   };
 
