@@ -930,10 +930,10 @@ function startConversation(recipientId) {
     uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
     method: 'GET',
     json: {}}, function (error, response, body) {
-      dados=JSON.stringify(response);
-      console.log(dados);
-      nome=dados.body.first_name;
-      sobrenome=dados.body.last_name;
+      //dados=JSON.stringify(response);
+      console.log(body);
+      nome=body.first_name;
+      sobrenome=body.last_name;
   });  
   var messageData = {
     recipient: {
