@@ -215,17 +215,17 @@ app.get('/config3', function(req, res) {
  request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
-    json: {persistent_menu:[{
-      locale: "default",
-      composer_input_disabled:"true",
-      call_to_actions:[{
-          title:"My Account",
-          type:"nested",
-          call_to_actions:[
-            {
-              title:"Pay Bill",
-              type:"postback",
-              payload:"PAYBILL_PAYLOAD"
+    json: {
+      persistent_menu:[{
+        locale: "default",
+        composer_input_disabled:"true",
+        call_to_actions:[{
+            title:"My Account",
+            type:"nested",
+            call_to_actions:[{
+                title:"Pay Bill",
+                type:"postback",
+                payload:"PAYBILL_PAYLOAD"
             },
             {
               title:"History",
@@ -236,9 +236,8 @@ app.get('/config3', function(req, res) {
               title:"Contact Info",
               type:"postback",
               payload:"CONTACT_INFO_PAYLOAD"
-            }
-          ]
-        },
+            }]
+          },
         {
           type:"web_url",
           title:"Latest News",
@@ -246,15 +245,8 @@ app.get('/config3', function(req, res) {
           webview_height_ratio:"full"
         }
       ]
-    },
-    {
-      locale:"pt_BR",
-      composer_input_disabled:false
-    }
-  ]
-    }
-  });  
-
+    }]
+    }});  
 });
 
 
