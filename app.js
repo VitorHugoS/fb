@@ -201,47 +201,6 @@ app.get('/config', function(req, res) {
 });
 
 
-curl -X POST -H "Content-Type: application/json" -d '{
-  "persistent_menu":[
-    {
-      "locale":"default",
-      "composer_input_disabled":true,
-      "call_to_actions":[
-        {
-          "title":"My Account",
-          "type":"nested",
-          "call_to_actions":[
-            {
-              "title":"Pay Bill",
-              "type":"postback",
-              "payload":"PAYBILL_PAYLOAD"
-            },
-            {
-              "title":"History",
-              "type":"postback",
-              "payload":"HISTORY_PAYLOAD"
-            },
-            {
-              "title":"Contact Info",
-              "type":"postback",
-              "payload":"CONTACT_INFO_PAYLOAD"
-            }
-          ]
-        },
-        {
-          "type":"web_url",
-          "title":"Latest News",
-          "url":"http://petershats.parseapp.com/hat-news",
-          "webview_height_ratio":"full"
-        }
-      ]
-    },
-    {
-      "locale":"zh_CN",
-      "composer_input_disabled":false
-    }
-  ]
-}
 app.get('/config2', function(req, res) {
  request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
