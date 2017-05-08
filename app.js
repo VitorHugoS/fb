@@ -923,18 +923,21 @@ function sendReceiptMessage(recipientId) {
 }*/
 
 function startConversation(recipientId) {
+  var nome;
+  var sobrenome;
   request({
     uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
     method: 'GET',
     json: {}}, function (error, response, body) {
-      console.log(response);
+      nome=response.first_name;
+      sobrenome=response.last_name;
   });  
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "Olá, selecione uma opção para ter acesso aos nossos recursos.",
+      text: "Olá "+nome+" "+sobrenome+", selecione uma opção para ter acesso aos nossos recursos.",
       quick_replies: [
         {
           "content_type":"text",
