@@ -932,8 +932,8 @@ function startConversation(recipientId) {
     json: {}}, function (error, response, body) {
       dados=JSON.stringify(response);
       console.log(dados);
-      nome=response.first_name;
-      sobrenome=response.last_name;
+      nome=dados.body.first_name;
+      sobrenome=dados.body.last_name;
   });  
   var messageData = {
     recipient: {
