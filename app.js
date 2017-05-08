@@ -353,7 +353,7 @@ function receivedMessage(event) {
       messageId, appId, metadata);
        switch(metadata){
         case 'buscaRecados':
-          console.log(senderID);
+         startConversation(senderID);
         break;
         default:
           //startConversation(senderID);
@@ -368,7 +368,7 @@ function receivedMessage(event) {
     switch(quickReplyPayload){
         case 'recados':
           buscaUltimo(senderID);
-          startConversation(senderID);
+
         break;
         case 'sempresas':
           sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
