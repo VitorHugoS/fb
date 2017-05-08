@@ -360,11 +360,8 @@ function receivedMessage(event) {
     switch(quickReplyPayload){
         case 'recados':
           buscaUltimo(senderID);
-         }
-
         break;
         case 'sempresas':
-          
           buscaEmpresa(senderID, "Digite o nome da empresa:");
           switch(metadata){
             case "buscaEmpresa":
