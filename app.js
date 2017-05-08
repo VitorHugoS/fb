@@ -351,14 +351,6 @@ function receivedMessage(event) {
     // Just logging message echoes to console
     console.log("Received echo for message %s and app %d with metadata %s", 
       messageId, appId, metadata);
-       switch(metadata){
-        case 'buscaRecados':
-          console.log(senderID);
-        break;
-        default:
-          //startConversation(senderID);
-        break;
-      }
     return;
   } else if (quickReply) {
     var quickReplyPayload = quickReply.payload;
@@ -368,6 +360,9 @@ function receivedMessage(event) {
     switch(quickReplyPayload){
         case 'recados':
           buscaUltimo(senderID);
+          if(metadata=="buscaRecados"){
+            startConversation(senderID);
+          }
         break;
         case 'sempresas':
           sendText(senderID, "Para consultar um nome de empresa digite #nomedaempresa");
