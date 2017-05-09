@@ -422,6 +422,7 @@ function receivedMessage(event) {
                       callSendAPI(messageData);
                       pontoAtual(senderID, "delivery");
                   }
+                );
               break;
               case 'sclientes':
                 sendText(senderID, "Para consultar um cliente digite @nomedocliente");
