@@ -363,12 +363,12 @@ function receivedMessage(event) {
               break;
               case 'delivery':
                 request({
-                  uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
+                  uri: 'https://graph.facebook.com/v2.6/'+senderID+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
                   method: 'GET',
                   json: {}}, function (error, response, body) {
                       var messageData = {
                       recipient: {
-                        id: recipientId
+                        id: senderID
                       },
                       message: {
                         attachment: {
