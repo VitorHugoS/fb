@@ -28,7 +28,7 @@ var connection = mysql.createConnection({
     database : 'atadesig2_intranet',
 });
 
-var _estado = [];
+global.estado = [];
 var _clienteNome = [];
 var _clienteTelefone = [];
 var _clienteEndereco = [];

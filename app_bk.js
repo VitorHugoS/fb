@@ -28,7 +28,7 @@ var connection = mysql.createConnection({
     database : 'atadesig2_intranet',
 });
 
-var _estado = [];
+var global.estado  = [];
 
 
 function handleDisconnect() {
@@ -348,8 +348,8 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-  if(_estado[senderID]){
-    switch(_estado[senderID]){
+  if(global.estado [senderID]){
+    switch(global.estado [senderID]){
               case 'recados':
                 sendText(senderID, "voce entrou nos recados");
               break;
@@ -482,7 +482,7 @@ function receivedMessage(event) {
 }
 
 function pontoAtual(recipientId, estado){
-  _estado[recipientId] = estado;
+  global.estado [recipientId] = estado;
 }
 /*
  * Delivery Confirmation Event
