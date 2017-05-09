@@ -142,6 +142,9 @@ app.post('/webhook', function (req, res) {
         if (messagingEvent.optin) {
           receivedAuthentication(messagingEvent);
         } else if (messagingEvent.message) {
+          if(_estado[messagingEvent.sender.id]){
+            console.log("preencheu");
+          }
           receivedMessage(messagingEvent);
         } else if (messagingEvent.delivery) {
           receivedDeliveryConfirmation(messagingEvent);
