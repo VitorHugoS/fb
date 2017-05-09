@@ -29,13 +29,6 @@ var connection = mysql.createConnection({
 });
 
 var _estado = [];
-var _clienteNome = [];
-var _clienteTelefone = [];
-var _clienteEndereco = [];
-var _clientePagamento = [];
-var _clienteTroco = [];
-
-
 
 
 function handleDisconnect() {
@@ -188,12 +181,22 @@ app.get('/authorize', function(req, res) {
   });
 });
 
+app.get('/login', function(req, res) {
+    connection.query('SELECT * from `recados` WHERE `concluido` = 0 and `id_usuario` = 1', [], function(err, rows, fields)
+        {
+                console.log('Connection result error '+err);
+               console.log('no of records is '+rows.length);
+                res.writeHead(200, { 'Content-Type': 'application/json'});
+                res.end(JSON.stringify(rows));
+                res.end();
+        }); 
+});
 
 app.get('/config', function(req, res) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+PAGE_ACCESS_TOKEN,
     method: 'POST',
-    json: {setting_type: "greeting", greeting: { text: "Bem vindo ao auto atendimentoo da fábrica de delícias. Para começar clique no botão abaixo!" }}}, function (error, response, body) {
+    json: {setting_type: "greeting", greeting: { text: "Bem vindo ao auto atendimento. Para começar clique no botão abaixo!" }}}, function (error, response, body) {
       //res.send("ala");
   });   
 
@@ -347,28 +350,14 @@ function receivedMessage(event) {
   var quickReply = message.quick_reply;
   if(_estado[senderID]){
     switch(_estado[senderID]){
-              case 'delivery':
-                var quickReplyPayload = quickReply.payload;
-                switch(quickReplyPayload){
-                        case 'cadastradoS':
-                          sendText(senderID, "Certo, veja nossos cardápio.");
-                          pontoAtual(senderID, "delivery1");
-                        break;
-                        case 'cadastradoN':
-                          sendText(senderID, "Ok, agora irei pedir alguns dados para te cadastrar no sistema, na próxima vez isto não será necessário.");
-                          pontoAtual(senderID, "delivery2");
-                        break;
-  
-                        default:
-                          startConversation(senderID);
-                        break;
-                    }
+              case 'recados':
+                sendText(senderID, "voce entrou nos recados");
               break;
-              case 'delivery1':
-                sendText(senderID, "cadastrado");
+              case 'empresas':
+                sendText(senderID, "voce entrou em empresas");
               break;
-              case 'delivery2':
-                sendText(senderID, "efetue seu cadastro");
+              case 'cliente':
+                sendText(senderID, "voce entrou em cliente");
               break;
               default:
                 startConversation(senderID);
@@ -386,42 +375,17 @@ function receivedMessage(event) {
             messageId, quickReplyPayload);
 
           switch(quickReplyPayload){
-              case 'cardapio':
+              case 'recados':
                 buscaUltimo(senderID);
-                pontoAtual(senderID, "cardapio");
+                pontoAtual(senderID, "recados");
               break;
-              case 'delivery':
-                request({
-                  uri: 'https://graph.facebook.com/v2.6/'+recipientId+'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN,
-                  method: 'GET',
-                  json: {}}, function (error, response, body) {
-                      var messageData = {
-                      recipient: {
-                        id: recipientId
-                      },
-                      message: {
-                        attachment: {
-                          type: "template",
-                          payload: {
-                            template_type: "button",
-                            text: body.first_name+" você já é cadastrado em nosso sistema?",
-                            buttons:[{
-                              type: "postback",
-                              title:"Sim",
-                              payload:"cadastradoS"
-                            },
-                            {
-                              type: "postback",
-                              title:"Não",
-                              payload:"cadastradoN"
-                            }]
-                          }
-                        }
-                      }
-                    };  
-                      callSendAPI(messageData);
-                      pontoAtual(senderID, "delivery");
-                  }
+              case 'sempresas':
+                buscaEmpresa(senderID, "Digite o nome da empresa:");
+                switch(metadata){
+                  case "buscaEmpresa":
+                  pontoAtual(senderID, "empresas");
+                  break;
+                }
               break;
               case 'sclientes':
                 sendText(senderID, "Para consultar um cliente digite @nomedocliente");
@@ -1002,10 +966,7 @@ function sendReceiptMessage(recipientId) {
   callSendAPI(messageData);
 }*/
 
-
-
 function startConversation(recipientId) {
-  pontoAtual(recipientId, "inicio");
   var nome;
   var sobrenome;
   var dados;
@@ -1018,22 +979,22 @@ function startConversation(recipientId) {
       id: recipientId
     },
     message: {
-      text: "Olá "+body.first_name+" "+body.last_name+", selecione uma opção para conferir nossos recursos.",
+      text: "Olá "+body.first_name+" "+body.last_name+", selecione uma opção para ter acesso aos nossos recursos.",
       quick_replies: [
         {
           "content_type":"text",
-          "title":"Cardápio",
-          "payload":"cardapio"
+          "title":"Meus Recados",
+          "payload":"recados"
         },
         {
           "content_type":"text",
-          "title":"Delivery",
-          "payload":"delivery"
+          "title":"Buscar Empresas",
+          "payload":"sempresas"
         },
         {
           "content_type":"text",
-          "title":"Deixe seu feedback",
-          "payload":"feedback"
+          "title":"Buscar Cliente",
+          "payload":"sclientes"
         }
       ]
     }
