@@ -351,11 +351,11 @@ if( _estado[senderID]==!undefined || _estado[senderID]==!null){
   switch(_estado[senderID]){
     case 'entrega1':
       sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
-      pontoAtual(senderID, "entregaBuscaCPF");
+      _estado[senderID]="entregaBuscaCPF";
     break;
     case 'entrega2':
       sendText(senderID, "Certo, digite o seu cpf");
-      pontoAtual(senderID, "entregaCadastroCPF");
+      _estado[senderID]="entregaCadastroCPF";
     break;
   }
 
@@ -560,11 +560,11 @@ function receivedPostback(event) {
     break;
     case 'cadastradoS':
       sendText(senderID, "Certo, digie o número de seu cpf para buscar seu cadastro no sistema:");
-      pontoAtual(senderID, "entrega1");
+      _estado[senderID]="entrega1";
     break;
     case 'cadastradoN':
       sendText(senderID, "Certo, para iniciar seu cadastro, digite o seu cpf, nem pontos ou traços:");
-      pontoAtual(senderID, "entrega2");
+      _estado[senderID]="entrega2";
     break;
     default:
       //sendTextMessage(senderID, "Postback called");
@@ -1170,9 +1170,10 @@ function sendAccountLinking(recipientId) {
  * get the message id in a response 
  *
  */
- function pontoAtual(recipientId, estado){
-  _estado[recipientId] = estado;
+function pontoAtual(senderId, estado){
+  _estado[senderId] = estado;
 }
+
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
