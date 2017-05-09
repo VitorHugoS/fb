@@ -352,7 +352,7 @@ if(_estado[senderID]){
       sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
       pontoAtual(senderID, "entregaBuscaCPF");
     break;
-    case 'entrega2';
+    case 'entrega2':
       sendText(senderID, "Certo, digite o seu cpf");
       pontoAtual(senderID, "entregaCadastroCPF");
     break;
