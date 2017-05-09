@@ -346,7 +346,8 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
-if(_estado[senderID]){
+if( _estado[senderID]==!undefined || _estado[senderID]==!null){
+
   switch(_estado[senderID]){
     case 'entrega1':
       sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
@@ -554,6 +555,9 @@ function receivedPostback(event) {
   // let them know it was successful
   switch(payload){
     case 'BOTAO_INICIO':
+      startConversation(senderID);
+    break;
+    case 'sample_get_started_payload':
       startConversation(senderID);
     break;
     case 'cadastradoS':
