@@ -142,9 +142,6 @@ app.post('/webhook', function (req, res) {
         if (messagingEvent.optin) {
           receivedAuthentication(messagingEvent);
         } else if (messagingEvent.message) {
-          if(_estado[messagingEvent.sender.id]){
-            console.log("preencheu");
-          }
           receivedMessage(messagingEvent);
         } else if (messagingEvent.delivery) {
           receivedDeliveryConfirmation(messagingEvent);
@@ -349,6 +346,19 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
+if(_estado[senderID]){
+  switch(_estado[senderID]){
+    case 'entrega1':
+      sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
+      pontoAtual(senderID, "entregaBuscaCPF");
+    break;
+    case 'entrega2';
+      sendText(senderID, "Certo, digite o seu cpf");
+      pontoAtual(senderID, "entregaCadastroCPF");
+    break;
+  }
+
+}else{
         if (isEcho) {
           // Just logging message echoes to console
           console.log("Received echo for message %s and app %d with metadata %s", 
@@ -489,6 +499,7 @@ function receivedMessage(event) {
         } else if (messageAttachments) {
           sendTextMessage(senderID, "Message with attachment received");
         }
+      }
   }
 
 
@@ -545,6 +556,14 @@ function receivedPostback(event) {
   switch(payload){
     case 'BOTAO_INICIO':
       startConversation(senderID);
+    break;
+    case 'cadastradoS':
+      sendText(senderID, "Certo, digie o número de seu cpf para buscar seu cadastro no sistema:");
+      pontoAtual(senderID, "entrega1");
+    break;
+    case 'cadastradoN':
+      sendText(senderID, "Certo, para iniciar seu cadastro, digite o seu cpf, nem pontos ou traços:");
+      pontoAtual(senderID, "entrega2");
     break;
     default:
       //sendTextMessage(senderID, "Postback called");
