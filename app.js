@@ -346,20 +346,19 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
-console.log(_estado[senderID]);
-//if(_estado[senderID]){
- // switch(_estado[senderID]){
- //   case 'entrega1':
-   //   sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
- //     pontoAtual(senderID, "entregaBuscaCPF");
-  //  break;
- //   case 'entrega2':
- //     sendText(senderID, "Certo, digite o seu cpf");
- //     pontoAtual(senderID, "entregaCadastroCPF");
-//    break;
- // }
+if(_estado[senderID]){
+  switch(_estado[senderID]){
+    case 'entrega1':
+      sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
+      pontoAtual(senderID, "entregaBuscaCPF");
+    break;
+    case 'entrega2':
+      sendText(senderID, "Certo, digite o seu cpf");
+      pontoAtual(senderID, "entregaCadastroCPF");
+    break;
+  }
 
-//}else{
+}else{
         if (isEcho) {
           // Just logging message echoes to console
           console.log("Received echo for message %s and app %d with metadata %s", 
@@ -499,7 +498,7 @@ console.log(_estado[senderID]);
         } else if (messageAttachments) {
           sendTextMessage(senderID, "Message with attachment received");
         }
-     // }
+      }
   }
 
 
