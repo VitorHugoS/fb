@@ -28,6 +28,8 @@ var connection = mysql.createConnection({
     database : 'atadesig2_intranet',
 });
 
+var _estado = [];
+
 
 function handleDisconnect() {
   connection = mysql.createConnection({
@@ -346,122 +348,142 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
+  if(_estado[senderID]){
+    switch(_estado[senderID]){
+              case 'recados':
+                sendText(senderID, "voce entrou nos recados");
+              break;
+              case 'empresas':
+                sendText(senderID, "voce entrou em empresas");
+              break;
+              case 'cliente':
+                sendText(senderID, "voce entrou em cliente");
+              break;
+              default:
+                startConversation(senderID);
+              break;
+    }
+  }else{
+        if (isEcho) {
+          // Just logging message echoes to console
+          console.log("Received echo for message %s and app %d with metadata %s", 
+            messageId, appId, metadata);
+          return;
+        } else if (quickReply) {
+          var quickReplyPayload = quickReply.payload;
+          console.log("Quick reply for message %s with payload %s",
+            messageId, quickReplyPayload);
 
-  if (isEcho) {
-    // Just logging message echoes to console
-    console.log("Received echo for message %s and app %d with metadata %s", 
-      messageId, appId, metadata);
-    return;
-  } else if (quickReply) {
-    var quickReplyPayload = quickReply.payload;
-    console.log("Quick reply for message %s with payload %s",
-      messageId, quickReplyPayload);
+          switch(quickReplyPayload){
+              case 'recados':
+                buscaUltimo(senderID);
+                pontoAtual(senderID, "recados");
+              break;
+              case 'sempresas':
+                buscaEmpresa(senderID, "Digite o nome da empresa:");
+                switch(metadata){
+                  case "buscaEmpresa":
+                  pontoAtual(senderID, "empresas");
+                  break;
+                }
+              break;
+              case 'sclientes':
+                sendText(senderID, "Para consultar um cliente digite @nomedocliente");
+                pontoAtual(senderID, "cliente");
+              break;
+              default:
+                startConversation(senderID);
+              break;
 
-    switch(quickReplyPayload){
-        case 'recados':
-          buscaUltimo(senderID);
-        break;
-        case 'sempresas':
-          buscaEmpresa(senderID, "Digite o nome da empresa:");
-          switch(metadata){
-            case "buscaEmpresa":
-            console.log(messageText);
-            break;
           }
-        break;
-        case 'sclientes':
-          sendText(senderID, "Para consultar um cliente digite @nomedocliente");
-        break;
-        default:
-          startConversation(senderID);
-        break;
 
-    }
+          //sendTextMessage(senderID, "Quick reply tapped");
+          return;
+        }
 
-    //sendTextMessage(senderID, "Quick reply tapped");
-    return;
-  }
+        if (messageText) {
+          var empresa=messageText.indexOf("#") > -1;
+          var cliente=messageText.indexOf("@") > -1;
+          if(empresa){
+              var trata=messageText.replace("#","");
+              buscarEmpresa(senderID, trata);
+          }
+          if(cliente){
+            sendText(senderID, "Buscar cliente");
+          }
 
-  if (messageText) {
-    var empresa=messageText.indexOf("#") > -1;
-    var cliente=messageText.indexOf("@") > -1;
-    if(empresa){
-        var trata=messageText.replace("#","");
-        buscarEmpresa(senderID, trata);
-    }
-    if(cliente){
-      sendText(senderID, "Buscar cliente");
-    }
+          // If we receive a text message, check to see if it matches any special
+          // keywords and send back the corresponding example. Otherwise, just echo
+          // the text we received.
+          switch (messageText) {
+          case 'image':
+             sendImageMessage(senderID);
+              break;
 
-    // If we receive a text message, check to see if it matches any special
-    // keywords and send back the corresponding example. Otherwise, just echo
-    // the text we received.
-    switch (messageText) {
-    case 'image':
-       sendImageMessage(senderID);
-        break;
+            case 'gif':
+              sendGifMessage(senderID);
+              break;
 
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
+            case 'audio':
+              sendAudioMessage(senderID);
+              break;
 
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
+            case 'video':
+              sendVideoMessage(senderID);
+              break;
 
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
+            case 'file':
+              sendFileMessage(senderID);
+              break;
 
-      case 'file':
-        sendFileMessage(senderID);
-        break;
+            case 'button':
+              sendButtonMessage(senderID);
+              break;
 
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
+            case 'generic':
+              sendGenericMessage(senderID);
+              break;
 
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
+           case 'receipt':
+              sendReceiptMessage(senderID);
+              break;
 
-     case 'receipt':
-        sendReceiptMessage(senderID);
-        break;
+            case 'quick reply':
+              sendQuickReply(senderID);
+              break;        
 
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;        
+            case 'read receipt':
+              sendReadReceipt(senderID);
+              break;        
 
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;        
+            case 'typing on':
+              sendTypingOn(senderID);
+              break;        
 
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;        
+            case 'typing off':
+              sendTypingOff(senderID);
+              break;        
 
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;        
+          //  case 'account linking':
+          //    sendAccountLinking(senderID);
+          //    break;
 
-    //  case 'account linking':
-    //    sendAccountLinking(senderID);
-    //    break;
-
-    default:
-      if(metadata){
-        console.log(metada);
-      }
-      startConversation(senderID);
-    break;
-    }
-  } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
+          default:
+            if(metadata){
+              console.log(metada);
+            }
+            startConversation(senderID);
+          break;
+          }
+        } else if (messageAttachments) {
+          sendTextMessage(senderID, "Message with attachment received");
+        }
   }
 }
 
-
+function pontoAtual(recipientId, estado){
+  _estado[recipientId] = estado;
+}
 /*
  * Delivery Confirmation Event
  *
