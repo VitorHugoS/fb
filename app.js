@@ -345,7 +345,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-console.log(global.estado[senderID]);
+console.log(estado[senderID]);
 if( global.estado[senderID]==!undefined || global.estado[senderID]==!null){
 
   switch(global.estado[senderID]){
