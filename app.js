@@ -345,36 +345,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-  if(_estado[senderID]){
-    switch(_estado[senderID]){
-              case 'entrega':
-                var quickReplyPayload = quickReply.payload;
-                switch(quickReplyPayload){
-                        case 'cadastradoS':
-                          sendText(senderID, "Certo, veja nossos cardápio.");
-                          pontoAtual(senderID, "delivery1");
-                        break;
-                        case 'cadastradoN':
-                          sendText(senderID, "Ok, agora irei pedir alguns dados para te cadastrar no sistema, na próxima vez isto não será necessário.");
-                          pontoAtual(senderID, "delivery2");
-                        break;
-  
-                        default:
-                          startConversation(senderID);
-                        break;
-                    }
-              break;
-              case 'delivery1':
-                sendText(senderID, "cadastrado");
-              break;
-              case 'delivery2':
-                sendText(senderID, "efetue seu cadastro");
-              break;
-              default:
-                //startConversation(senderID);
-              break;
-    }
-  }else{
+
         if (isEcho) {
           // Just logging message echoes to console
           console.log("Received echo for message %s and app %d with metadata %s", 
@@ -516,7 +487,7 @@ function receivedMessage(event) {
           sendTextMessage(senderID, "Message with attachment received");
         }
   }
-}
+
 
 function pontoAtual(recipientId, estado){
   _estado[recipientId] = estado;
