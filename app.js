@@ -345,17 +345,17 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-console.log(_estado[senderID]);
-if( _estado[senderID]==!undefined || _estado[senderID]==!null){
+console.log(global.estado[senderID]);
+if( global.estado[senderID]==!undefined || global.estado[senderID]==!null){
 
-  switch(_estado[senderID]){
+  switch(global.estado[senderID]){
     case 'entrega1':
       sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
-      _estado[senderID]="entregaBuscaCPF";
+      pontoAtual(senderID, "entregaBuscaCPF");
     break;
     case 'entrega2':
       sendText(senderID, "Certo, digite o seu cpf");
-      _estado[senderID]="entregaCadastroCPF";
+      pontoAtual(senderID, "entregaCadastroCPF");
     break;
   }
 
@@ -560,18 +560,11 @@ function receivedPostback(event) {
     break;
     case 'cadastradoS':
       sendText(senderID, "Certo, digie o número de seu cpf para buscar seu cadastro no sistema:");
-      console.log("-----------");
-      _estado[senderID]="entrega1";
-      console.log(_estado[senderID]);
-      console.log("-----------");
-      
+      pontoAtual(senderID, "entrega1");
     break;
     case 'cadastradoN':
       sendText(senderID, "Certo, para iniciar seu cadastro, digite o seu cpf, nem pontos ou traços:");
-      console.log("-----------");
-      console.log(senderID);
-      console.log("-----------");
-      _estado[senderID]="entrega2";
+      pontoAtual(senderID, "entrega2");
     break;
     default:
       //sendTextMessage(senderID, "Postback called");
@@ -1007,7 +1000,6 @@ function sendReceiptMessage(recipientId) {
 
 
 function startConversation(recipientId) {
-  pontoAtual(recipientId, "inicio");
   var nome;
   var sobrenome;
   var dados;
@@ -1177,8 +1169,8 @@ function sendAccountLinking(recipientId) {
  * get the message id in a response 
  *
  */
-function pontoAtual(senderId, estado){
-  _estado[senderId] = estado;
+function pontoAtual(senderId, estados){
+  global.estado[senderId] = estados;
 }
 
 function callSendAPI(messageData) {
