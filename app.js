@@ -560,10 +560,12 @@ function receivedPostback(event) {
     break;
     case 'cadastradoS':
       sendText(senderID, "Certo, digie o número de seu cpf para buscar seu cadastro no sistema:");
+      console.log(senderID+"entrega1");
       _estado[senderID]="entrega1";
     break;
     case 'cadastradoN':
       sendText(senderID, "Certo, para iniciar seu cadastro, digite o seu cpf, nem pontos ou traços:");
+      console.log(senderID+"entrega2");
       _estado[senderID]="entrega2";
     break;
     default:
