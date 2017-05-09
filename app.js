@@ -503,9 +503,7 @@ if( _estado[senderID]==!undefined || _estado[senderID]==!null){
   }
 
 
-function pontoAtual(recipientId, estado){
-  _estado[recipientId] = estado;
-}
+
 /*
  * Delivery Confirmation Event
  *
@@ -1172,6 +1170,9 @@ function sendAccountLinking(recipientId) {
  * get the message id in a response 
  *
  */
+ function pontoAtual(recipientId, estado){
+  _estado[recipientId] = estado;
+}
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
