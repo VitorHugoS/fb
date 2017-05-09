@@ -347,7 +347,7 @@ function receivedMessage(event) {
   var quickReply = message.quick_reply;
   if(_estado[senderID]){
     switch(_estado[senderID]){
-              case 'delivery':
+              case 'entrega':
                 var quickReplyPayload = quickReply.payload;
                 switch(quickReplyPayload){
                         case 'cadastradoS':
@@ -422,7 +422,7 @@ function receivedMessage(event) {
                       callSendAPI(messageData);   
                   }
                 );
-                pontoAtual(senderID, "delivery");
+                pontoAtual(senderID, "entrega");
               break;
               case 'sclientes':
                 sendText(senderID, "Para consultar um cliente digite @nomedocliente");
