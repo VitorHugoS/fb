@@ -407,7 +407,6 @@ console.log(_estado[senderID]);
                       callSendAPI(messageData);   
                   }
                 );
-                pontoAtual(senderID, "entrega");
               break;
               case 'sclientes':
                 sendText(senderID, "Para consultar um cliente digite @nomedocliente");
