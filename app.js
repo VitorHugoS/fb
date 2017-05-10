@@ -355,7 +355,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-  
+  var state = 0;
   console.log("-----ESTADO------");
   //console.log(state);
   buscaAtual(event.sender.id, function(estado){
