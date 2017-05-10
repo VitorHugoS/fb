@@ -251,7 +251,7 @@ app.get('/config3', function(req, res) {
 app.get('/config4', function(req, res) {
    connection.query('SELECT * from `sessaoUser` WHERE `idUser` ="1677684085581113" limit 1', [], function(err, rows, fields)
         { 
-          console.log(rows);
+          console.log(rows[0].status);
           //if(rows.length!=0){
           //  
           //}else{
