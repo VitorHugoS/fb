@@ -1194,7 +1194,7 @@ function pontoAtual(senderId, estados){
         }); 
 }
 function buscaAtual(senderId){
-  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ="1677684085581113" limit 1', [], function(err, rows, fields)
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
             return rows[0].status; 
