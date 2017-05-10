@@ -1180,13 +1180,14 @@ function sendAccountLinking(recipientId) {
  *
  */
 function pontoAtual(senderId, estados){
-  connection.query('SELECT * from `sessaoUser` WHERE `idUser` = '+senderId+' limit 1', [], function(err, rows, fields)
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
-           for (var i in rows) {
-            sendRecados(recipientId, "Id:"+rows[i].hash+"\nTítulo:"+rows[i].titulo+"\nRecado\n"+rows[i].texto);
-           }
+          if(rows.length==0){
+            connection.query('insert into sessaoUser (idUser, status) values ("'+senderId+'", "'+estado+'")', []);  
+          }else{
+            connection.query('UPDATE sessaoUser set status="'+estado+'" WHERE `idUser` = "'+senderId+'"', []);
+          }
         }); 
-  //global.estado[senderId] = estados;
 }
 
 function callSendAPI(messageData) {
