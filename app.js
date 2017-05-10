@@ -251,7 +251,7 @@ app.get('/config3', function(req, res) {
 app.get('/config4', function(req, res) {
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` =22 limit 1', [], function(err, rows, fields)
         { 
-          if(rows){
+          if(rows>0){
             console.log("1");
             connection.query('UPDATE sessaoUser set status="validando" WHERE `idUser` = 22', []); 
           }else{
