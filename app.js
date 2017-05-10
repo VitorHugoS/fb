@@ -1199,9 +1199,9 @@ function buscaAtual(senderId){
         { 
           if(rows.length!=0){
             var retorno=rows[0].status;
-            return retorno; 
+            return callback(retorno); 
           }else{
-            return null;
+            return callback(null);
           }
         });
 }
