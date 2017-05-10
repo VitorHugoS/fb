@@ -355,11 +355,14 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-  var state = buscaAtual(event.sender.id);
+  
   console.log("-----ESTADO------");
-  console.log(state);
-  console.log(event.recipient.id);
-  console.log(buscaAtual(event.sender.id));
+  //console.log(state);
+  buscaAtual(event.sender.id, function(estado){
+      console.log(estado)
+  });
+  //console.log(event.recipient.id);
+  //console.log(buscaAtual(event.sender.id));
   console.log("-----ESTADO------");
 if( state!=null){
 
@@ -1194,14 +1197,14 @@ function pontoAtual(senderId, estados){
           }
         }); 
 }
-function buscaAtual(senderId){
+function buscaAtual(senderId, cb){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
             var retorno=rows[0].status;
-            return callback(retorno); 
+            cb(retorno); 
           }else{
-            return callback(null);
+            cb(null);
           }
         });
 }
