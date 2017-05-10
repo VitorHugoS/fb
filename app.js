@@ -359,7 +359,7 @@ function receivedMessage(event) {
   console.log("-----ESTADO------");
   console.log(state);
   console.log(event.recipient.id);
-  console.log(buscaAtual(event.recipient.id));
+  console.log(buscaAtual(event.sender.id));
   console.log("-----ESTADO------");
 if( state!=null){
 
