@@ -356,14 +356,18 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
   var state = 0;
+
+
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+event.sender.id,+' limit 1', [], function(err, rows, fields)
+        { 
+          if(rows.length!=0){
+            var retorno=rows[0].status;
+            state=retorno;
+          }else{
+            state=null;
+          }
+        });
   console.log("-----ESTADO------");
-  //console.log(state);
-  buscaAtual(event.sender.id, function(state){
-      state=state;
-      console.log(state);
-  });
-  //console.log(event.recipient.id);
-  //console.log(buscaAtual(event.sender.id));
   console.log(state);
   console.log("-----ESTADO------");
 if( state!=null){
