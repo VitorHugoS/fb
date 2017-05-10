@@ -355,12 +355,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-  var state = buscaAtual(senderID);
-  console.log("-----ESTADO------");
-  console.log(event.sender.id);
-  console.log(event.recipient.id);
-  console.log(buscaAtual(senderID));
-  console.log("-----ESTADO------");
+  var state = buscaAtual(event.sender.id);
 if( state!=null){
 
   switch(state){
