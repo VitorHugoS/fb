@@ -251,7 +251,11 @@ app.get('/config3', function(req, res) {
 app.get('/config4', function(req, res) {
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` =22 limit 1', [], function(err, rows, fields)
         { 
-          console.log(rows);
+          if(rows){
+            connection.query('UPDATE sessaoUser set status="validando" WHERE `idUser` = 22', []); 
+          }else{
+            connection.query('insert into sessaoUser (idUser, status) values (22, "validando")', []); 
+          }
         }); 
 });
 
