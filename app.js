@@ -252,7 +252,7 @@ app.get('/config4', function(req, res) {
    connection.query('SELECT * from `sessaoUser` WHERE `idUser` ="1677684085581113" limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
-            console.log(rows[0].status); 
+            return rows[0].status; 
           }else{
             return null;
           }
@@ -356,7 +356,10 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
   var state = buscaAtual(senderID);
+  console.log("-----ESTADO------");
   console.log(state);
+  console.log(buscaAtual(senderID));
+  console.log("-----ESTADO------");
 if( state!=null){
 
   switch(state){
@@ -1191,15 +1194,14 @@ function pontoAtual(senderId, estados){
         }); 
 }
 function buscaAtual(senderId){
-  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ="1677684085581113" limit 1', [], function(err, rows, fields)
         { 
-          console.log(rows);
-          //if(rows.length!=0){
-          //  
-          //}else{
-          //  return null;
-         // }
-        }); 
+          if(rows.length!=0){
+            return rows[0].status; 
+          }else{
+            return null;
+          }
+        });
 }
 
 function callSendAPI(messageData) {
