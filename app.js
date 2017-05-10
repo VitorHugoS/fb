@@ -358,7 +358,8 @@ function receivedMessage(event) {
   var state = 0;
   console.log("-----ESTADO------");
   //console.log(state);
-  state=buscaAtual(event.sender.id, function(state){
+  buscaAtual(event.sender.id, function(state){
+      state=state;
       console.log(state);
   });
   //console.log(event.recipient.id);
@@ -1198,14 +1199,14 @@ function pontoAtual(senderId, estados){
           }
         }); 
 }
-function buscaAtual(senderId, side, callback){
+function buscaAtual(senderId, cb){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
             var retorno=rows[0].status;
-            callback(retorno); 
+            cb(retorno); 
           }else{
-            callback(null);
+            cb(null);
           }
         });
 }
