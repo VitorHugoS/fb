@@ -249,7 +249,7 @@ app.get('/config3', function(req, res) {
 });
 
 app.get('/config4', function(req, res) {
-  connection.query('SELECT * from `sessaoUser` WHERE `idUser` = '+senderId+' limit 1', [], function(err, rows, fields)
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` =22 limit 1', [], function(err, rows, fields)
         { 
           console.log(rows);
         }); 
