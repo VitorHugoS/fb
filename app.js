@@ -249,13 +249,14 @@ app.get('/config3', function(req, res) {
 });
 
 app.get('/config4', function(req, res) {
-  connection.query('SELECT * from `sessaoUser` WHERE `idUser` =22 limit 1', [], function(err, rows, fields)
+   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ="1677684085581113" limit 1', [], function(err, rows, fields)
         { 
-          if(rows.length==0){
-            connection.query('insert into sessaoUser (idUser, status) values ("22", "validando")', []);  
-          }else{
-            connection.query('UPDATE sessaoUser set status="validando" WHERE `idUser` = 22', []);
-          }
+          console.log(rows);
+          //if(rows.length!=0){
+          //  
+          //}else{
+          //  return null;
+         // }
         }); 
 });
 
@@ -1193,13 +1194,12 @@ function pontoAtual(senderId, estados){
 function buscaAtual(senderId){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
-          if(rows.length!=0){
-            for (var i in rows) {
-                return rows[i].status;
-            }
-          }else{
-            return null;
-          }
+          console.log(rows);
+          //if(rows.length!=0){
+          //  
+          //}else{
+          //  return null;
+         // }
         }); 
 }
 
