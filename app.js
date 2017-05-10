@@ -363,6 +363,7 @@ function receivedMessage(event) {
   });
   //console.log(event.recipient.id);
   //console.log(buscaAtual(event.sender.id));
+  console.log(state);
   console.log("-----ESTADO------");
 if( state!=null){
 
