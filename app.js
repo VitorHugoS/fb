@@ -1183,9 +1183,9 @@ function pontoAtual(senderId, estados){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length==0){
-            connection.query('insert into sessaoUser (idUser, status) values ("'+senderId+'", "'+estado+'")', []);  
+            connection.query('insert into sessaoUser (idUser, status) values ("'+senderId+'", "'+estados+'")', []);  
           }else{
-            connection.query('UPDATE sessaoUser set status="'+estado+'" WHERE `idUser` = "'+senderId+'"', []);
+            connection.query('UPDATE sessaoUser set status="'+estados+'" WHERE `idUser` = "'+senderId+'"', []);
           }
         }); 
 }
