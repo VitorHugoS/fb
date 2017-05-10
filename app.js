@@ -23,9 +23,9 @@ const
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
-    user     : 'atade_intranet',
+    user     : 'atade_delivery',
     password : 'A25FCD7F@!',
-    database : 'atadesig2_intranet',
+    database : 'atadesig2_delivery',
 });
 
 global.estado = [];
@@ -41,9 +41,9 @@ var _clienteTroco = [];
 function handleDisconnect() {
   connection = mysql.createConnection({
     host     : 'robb0377.publiccloud.com.br',
-    user     : 'atade_intranet',
+    user     : 'atade_delivery',
     password : 'A25FCD7F@!',
-    database : 'atadesig2_intranet',
+    database : 'atadesig2_delivery',
 });
 
   connection.connect(function(err) {              // The server is either down
@@ -248,6 +248,12 @@ app.get('/config3', function(req, res) {
     }});  
 });
 
+app.get('/config4', function(req, res) {
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` = '+senderId+' limit 1', [], function(err, rows, fields)
+        { 
+          console.log(rows);
+        }); 
+});
 
 
 /*
@@ -1170,7 +1176,13 @@ function sendAccountLinking(recipientId) {
  *
  */
 function pontoAtual(senderId, estados){
-  global.estado[senderId] = estados;
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` = '+senderId+' limit 1', [], function(err, rows, fields)
+        { 
+           for (var i in rows) {
+            sendRecados(recipientId, "Id:"+rows[i].hash+"\nTítulo:"+rows[i].titulo+"\nRecado\n"+rows[i].texto);
+           }
+        }); 
+  //global.estado[senderId] = estados;
 }
 
 function callSendAPI(messageData) {
