@@ -358,7 +358,6 @@ function receivedMessage(event) {
   var state = buscaAtual(event.sender.id);
   console.log("-----ESTADO------");
   console.log(state);
-  console.log(state1);
   console.log(event.recipient.id);
   console.log(buscaAtual(event.recipient.id));
   console.log("-----ESTADO------");
