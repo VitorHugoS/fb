@@ -358,8 +358,8 @@ function receivedMessage(event) {
   var state = 0;
   console.log("-----ESTADO------");
   //console.log(state);
-  state=buscaAtual(event.sender.id, function(estado){
-      return estado;
+  state=buscaAtual(event.sender.id, function(state){
+      console.log(state);
   });
   //console.log(event.recipient.id);
   //console.log(buscaAtual(event.sender.id));
@@ -1198,7 +1198,7 @@ function pontoAtual(senderId, estados){
           }
         }); 
 }
-function buscaAtual(senderId, cb){
+function buscaAtual(senderId, side, cb){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
