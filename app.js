@@ -355,10 +355,10 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
-console.log(estado[senderID]);
-if( global.estado[senderID]==!undefined || global.estado[senderID]==!null){
+  var state = buscaAtual(senderID);
+if( state!=null){
 
-  switch(global.estado[senderID]){
+  switch(state){
     case 'entrega1':
       sendText(senderID, "Certo, buscando o cpf "+messageText+" em nosso sistema.");
       pontoAtual(senderID, "entregaBuscaCPF");
@@ -1186,6 +1186,16 @@ function pontoAtual(senderId, estados){
             connection.query('insert into sessaoUser (idUser, status) values ("'+senderId+'", "'+estados+'")', []);  
           }else{
             connection.query('UPDATE sessaoUser set status="'+estados+'" WHERE `idUser` = "'+senderId+'"', []);
+          }
+        }); 
+}
+function buscaAtual(senderId){
+  connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
+        { 
+          if(rows.length!=0){
+            return rows[0].status;
+          }else{
+            return null;
           }
         }); 
 }
