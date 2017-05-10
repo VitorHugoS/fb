@@ -574,11 +574,11 @@ function receivedPostback(event) {
     break;
     case 'cadastradoS':
       sendText(senderID, "Certo, digie o número de seu cpf para buscar seu cadastro no sistema:");
-      pontoAtual(senderID, "entrega1");
+      pontoAtual(recipientID, "entrega1");
     break;
     case 'cadastradoN':
       sendText(senderID, "Certo, para iniciar seu cadastro, digite o seu cpf, nem pontos ou traços:");
-      pontoAtual(senderID, "entrega2");
+      pontoAtual(recipientID, "entrega2");
     break;
     default:
       //sendTextMessage(senderID, "Postback called");
