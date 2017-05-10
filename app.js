@@ -1198,14 +1198,14 @@ function pontoAtual(senderId, estados){
           }
         }); 
 }
-function buscaAtual(senderId, side, cb){
+function buscaAtual(senderId, side, callback){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
             var retorno=rows[0].status;
-            cb(retorno); 
+            callback(retorno); 
           }else{
-            cb(null);
+            callback(null);
           }
         });
 }
