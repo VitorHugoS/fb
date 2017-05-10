@@ -356,6 +356,7 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
   var state = buscaAtual(senderID);
+  console.log(state);
 if( state!=null){
 
   switch(state){
@@ -1193,7 +1194,9 @@ function buscaAtual(senderId){
   connection.query('SELECT * from `sessaoUser` WHERE `idUser` ='+senderId+' limit 1', [], function(err, rows, fields)
         { 
           if(rows.length!=0){
-            return rows[0].status;
+            for (var i in rows) {
+                return rows[i].status;
+            }
           }else{
             return null;
           }
