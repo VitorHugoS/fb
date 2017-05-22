@@ -99,7 +99,26 @@ router.post('/webhook', function (req, res) {
   }
 
 });
+router.get('/config', function(req, res) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAaeqt89HLIBAMOFAZBuZBVfM38OJCRBeHzhV4u2NYkt3HKbfZAdWQQvZB9PConCxo9qRGPR0wUs3YrXt4u0gchkSOaNAD0bK3EPRWPsGhLRK0cC3fhBlRRgepHbTfTjAdywvNCTkDhw0XPcelMJGijLavICGhEZBOWJ9sZAZAsKwZDZD',
+    method: 'POST',
+    json: {setting_type: "greeting", greeting: { text: "Bem vindo ao auto atendimento. Para começar clique no botão abaixo!" }}}, function (error, response, body) {
+      //res.send("ala");
+  });   
 
+});
+
+
+router.get('/config2', function(req, res) {
+ request({
+    uri: 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAaeqt89HLIBAMOFAZBuZBVfM38OJCRBeHzhV4u2NYkt3HKbfZAdWQQvZB9PConCxo9qRGPR0wUs3YrXt4u0gchkSOaNAD0bK3EPRWPsGhLRK0cC3fhBlRRgepHbTfTjAdywvNCTkDhw0XPcelMJGijLavICGhEZBOWJ9sZAZAsKwZDZD',
+    method: 'POST',
+    json: {setting_type: "call_to_actions", thread_state: "new_thread", call_to_actions: [{ payload: "clicou_comecar" }]}}, function (error, response, body) {
+     // res.send("ala");
+  });  
+
+});
 
 function trataMensagem (event) {
   var senderID = event.sender.id;
