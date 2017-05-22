@@ -21,7 +21,7 @@
     "express": "^4.13.4",
     "request": "^2.72.0",
     "mysql": "^2.5.4",
-    "socket.io": "^1.5,    
+    "socket.io": "*", 
     "async": "^2.0"
   },
   "engines": {
