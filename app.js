@@ -167,6 +167,7 @@ function trataMensagem (event) {
           console.log('O nome do cliente é ', messageText);
           sendTextMessage(senderID, 'Obrigado! Seu email foi inserido em nosso newsletter!.');
           _estados[senderID] = null;
+          showOptionsMenu(senderID);
           break;
         
         default:
