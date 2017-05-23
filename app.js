@@ -74,6 +74,7 @@ router.post('/webhook', function (req, res) {
               case 'clicou_preco':
                 sendTextMessage(event.sender.id, 'Confira nossas promoções:');
                 sendPromocao(event.sender.id);
+                showOptionsMenu(event.sender.id);
                 break;
                 
               case 'clicou_banda':
