@@ -292,7 +292,7 @@ function sendPromocao (recipientId) {
                 url: 'http://venture.com/outlet',
                 messenger_extensions: "true",
                 webview_height_ratio: "tall",
-                fallback_url: "http://venturefiat.com/outlet,
+                fallback_url: "http://venturefiat.com/outlet",
               },
            
            buttons: [{
