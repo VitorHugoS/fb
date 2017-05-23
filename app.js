@@ -282,11 +282,11 @@ function sendPromocao (recipientId) {
           elements: [{
             title: "Promoçao Venture",
             subtitle: "Venture Fiat",
-            item_url: "http://venture.com/outlet",               
+            item_url: "http://venturefiat.com/outlet",               
             image_url: "http://venturefiat.com/wp-content/uploads/2017/05/banner-outlet.jpg",
             buttons: [{
               type: "web_url",
-              url: "http://venture.com/outlet",
+              url: "http://venturefiat.com/outlet",
               title: "Veja Mais"
             }, {
               type: "postback",
