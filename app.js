@@ -269,47 +269,36 @@ function sendFirstMenu (recipientId) {
 }
 
 function sendPromocao (recipientId) {
-  
   var messageData = {
     recipient: {
       id: recipientId
     },
-
     message: {
       attachment: {
         type: "template",
         payload: {
           template_type: "generic",
-          text: "O que você procura?",
-          elements: [
-          
-            {
-              title: 'Promoção venture',
-              image_url: 'http://venturefiat.com/wp-content/uploads/2017/05/banner-outlet.jpg',
-              subtitle: 'Confira mais no site',
-              default_action:{
-                type: 'web_url',
-                url: 'http://venture.com/outlet',
-                messenger_extensions: "true",
-                webview_height_ratio: "tall",
-                fallback_url: "http://venturefiat.com/outlet",
-              },
-           
-           buttons: [{
-            type: "web_url",
-            url: "http://venturefiat.com/outlet",
-            title: "Confira a promoção"
-            }, {type: "postback",
-            title: "Voltar ao menu",
-            payload: "clicou_comecar"
-            }]
-            }
-          ]
+          elements: [{
+            title: "Promoçao Venture",
+            subtitle: "Venture Fiat",
+            item_url: "http://venture.com/outlet",               
+            image_url: "http://venturefiat.com/wp-content/uploads/2017/05/banner-outlet.jpg",
+            buttons: [{
+              type: "web_url",
+              url: "http://venture.com/outlet",
+              title: "Veja Mais"
+            }, {
+              type: "postback",
+              title: "Voltar ao Menu",
+              payload: "clicou_comecar",
+            }],
+    
+          }]
         }
       }
     }
-  };
-
+  };  
+ 
   callSendAPI(messageData);
 }
 
