@@ -72,12 +72,13 @@ router.post('/webhook', function (req, res) {
                 break;
                 
               case 'clicou_preco':
-                sendTextMessage(event.sender.id, '[promocao]');
-                showOptionsMenu(event.sender.id);
+                sendTextMessage(event.sender.id, 'Confira nossas promoções:');
+                sendPromocao(event.sender.id);
                 break;
                 
               case 'clicou_banda':
-                sendTextMessage(event.sender.id, '[telefones de contato]');
+                sendTextMessage(event.sender.id, 'Pessoa X: telefone');
+                sendTextMessage(event.sender.id, 'Pessoa Y: telefone');
                 showOptionsMenu(event.sender.id);
                 break;
                 
@@ -189,7 +190,7 @@ function trataMensagem (event) {
   
         default:
           //ENVIAR UMA MENSAGEM PADRÃO (TIPO, NÃO ENTENDI)
-          sendTextMessage(senderID, 'Eu não entendi sua pergunta. Por enquanto só entendo oi e tchau!');
+         sendFirstMenu(senderID);
 
 
     }
@@ -258,6 +259,51 @@ function sendFirstMenu (recipientId) {
               payload: 'clicou_lista'
             }
             
+          ]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendPromocao (recipientId) {
+  
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          text: "O que você procura?",
+          elements: [
+          
+            {
+              title: 'Promoção venture',
+              image_url: 'http://venturefiat.com/wp-content/uploads/2017/05/banner-outlet.jpg',
+              subtitle: 'Confira mais no site',
+              default_action:{
+                type: 'web_url',
+                url: 'http://venture.com/outlet',
+                messenger_extensions: "true",
+                webview_height_ratio: "tall",
+                fallback_url: "http://venturefiat.com/outlet,
+              },
+           
+           buttons: [{
+            type: "web_url",
+            url: "http://venturefiat.com/outlet",
+            title: "Confira a promoção"
+            }, {type: "postback",
+            title: "Voltar ao menu",
+            payload: "clicou_comecar"
+            }]
+            }
           ]
         }
       }
