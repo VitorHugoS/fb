@@ -308,7 +308,7 @@ function showOptionsMenu (recipientId) {
   
   setTimeout(function () {
     
-    sendTextMessage(recipientId, 'Posso te ajudar com mais alguma coisa?');
+    sendTextMessage(recipientId, 'Posso te ajudar com mais alguma coisa? (Sim, Não)');
     _estados[recipientId] = 'options_menu';
     
   }, 2500);
